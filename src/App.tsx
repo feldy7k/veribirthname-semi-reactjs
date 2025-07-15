@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
+import { IconSemiLogo, IconBell, IconHelpCircle, IconBytedanceLogo, IconHome, IconHistogram, IconLive, IconSetting } from '@douyinfe/semi-icons';
 import { Layout, Nav, Button, Breadcrumb, Skeleton, Avatar, Modal, Form, Col, Row, Space, Image, ImagePreview } from '@douyinfe/semi-ui';
-import { IconSemiLogo, IconBell, IconHelpCircle, IconBytedanceLogo, IconHome, IconLive, IconSetting } from '@douyinfe/semi-icons';
 
 function App() {
-    const { Header, Footer, Content } = Layout;
-
+    const { Header, Footer, Sider, Content } = Layout;
+    
     const initValues = {
         name: 'semi',
         business: ['ulikeCam'],
@@ -60,17 +60,31 @@ function App() {
         console.log('After Close callback executed');
     };
 
+    
     return (
         <Layout style={{ border: '1px solid var(--semi-color-border)' }}>
             <Header style={{ backgroundColor: 'var(--semi-color-bg-1)' }}>
                 <div>
                     <Nav mode="horizontal" defaultSelectedKeys={['Home']}>
                         <Nav.Header>
-                            <IconSemiLogo style={{ fontSize: 36 }} />
+                            <IconSemiLogo style={{ height: '36px', fontSize: 36 }} />
                         </Nav.Header>
-                        <Nav.Item itemKey="Home" text="Home" icon={<IconHome size="large" />} />
-                        {/* <Nav.Item itemKey="Live" text="Live" icon={<IconLive size="large" />} />
-                        <Nav.Item itemKey="Setting" text="Setting" icon={<IconSetting size="large" />} /> */}
+                        <span
+                            style={{
+                                color: 'var(--semi-color-text-2)',
+                            }}
+                        >
+                            <span
+                                style={{
+                                    marginRight: '24px',
+                                    color: 'var(--semi-color-text-0)',
+                                    fontWeight: '600',
+                                }}
+                            >
+                                VeriBirthName Dashboard
+                            </span>
+                            
+                        </span>
                         <Nav.Footer>
                             {/* <Button
                                 theme="borderless"
@@ -88,6 +102,9 @@ function App() {
                                     marginRight: '12px',
                                 }}
                             /> */}
+                            <span style={{marginRight:'10px', fontSize:'15px'}}>
+                                Feldy Judah Kambey | Administrator
+                            </span>
                             <Avatar color="blue" size="small">
                                 FK
                             </Avatar>
@@ -95,93 +112,111 @@ function App() {
                     </Nav>
                 </div>
             </Header>
-            <Content
-                style={{
-                    padding: '24px',
-                    backgroundColor: 'var(--semi-color-bg-0)',
-                }}
-            >
-                <Breadcrumb
+            <Layout>
+                <Sider style={{ backgroundColor: 'var(--semi-color-bg-1)' }}>
+                    <Nav
+                        style={{ maxWidth: 220, height: '100%' }}
+                        defaultSelectedKeys={['Home']}
+                        items={[
+                            { itemKey: 'Home', text: 'Home 首页', icon: <IconHome size="large" /> },
+                            // { itemKey: 'Histogram', text: '基础数据', icon: <IconHistogram size="large" /> },
+                            // { itemKey: 'Live', text: '测试功能', icon: <IconLive size="large" /> },
+                            // { itemKey: 'Setting', text: '设置', icon: <IconSetting size="large" /> },
+                        ]}
+                        footer={{
+                            collapseButton: false,
+                        }}
+                    />
+                </Sider>
+                <Content
                     style={{
-                        marginBottom: '24px',
-                    }}
-                    routes={['VeriBirthName', 'Home']}
-                />
-                <div
-                    style={{
-                        borderRadius: '10px',
-                        border: '1px solid var(--semi-color-border)',
-                        height: '69vh',
-                        padding: '32px',
+                        padding: '24px',
+                        backgroundColor: 'var(--semi-color-bg-0)',
                     }}
                 >
-                    {/* content start */}
-                    <Form
-                        initValues={initValues}
-                        style={{ padding: 10, width: '100%' }}
-                        onValueChange={(v)=>console.log(v)}
+                    <Breadcrumb
+                        style={{
+                            marginBottom: '24px',
+                        }}
+                        routes={['VeriBirthName', 'Home']}
+                    />
+                    <div
+                        style={{
+                            borderRadius: '10px',
+                            border: '1px solid var(--semi-color-border)',
+                            height: '69vh',
+                            padding: '32px',
+                        }}
                     >
-                        <Row>
-                            <Col span={12}>
-                                Check the eligible Baby Name for birth certificate registration.
-                                <Input
-                                    field="name"
-                                    label="Requested Full Name"
-                                    initValue={'Srikandi Ayu'}
-                                    style={style}
-                                    trigger='blur'
-                                    rules={[
-                                        { max: 60, message: 'maximum 60 characters' },
-                                        { validator: (rule, value) => value.trim().split(/\s+/).length >= 2, message: 'should contain at least 2 words' }
-                                    ]}
-                                />
-                                <Button type='primary' theme='solid' onClick={showDialog}>Submit</Button>
-                                <Modal
-                                    title="❌ Rejected"
-                                    // title="✅ Accepted"
-                                    visible={visible}
-                                    onOk={handleOk}
-                                    afterClose={handleAfterClose} //>=1.16.0
-                                    onCancel={handleCancel}
-                                    closeOnEsc={true}
-                                >
-                                    This name has already been used by 47 other citizens.
-                                    <br />
-                                    Please choose an alternative.
-                                </Modal>
-                                <div style={{color:'rgb(249,57,32)', marginTop:'32px'}}>
-                                    According to <a href="https://peraturan.bpk.go.id/Details/210274/permendagri-no-73-tahun-2022" target="_blank">
-                                        Regulation of the Minister of Home Affairs Number 73 of 2022, Indonesia
-                                    </a><br/>
-                                    - Name must be at least 2 words and a maximum of 60 characters (including spaces)<br/>
-                                    - Using Latin letters according to Indonesian spelling<br/>
-                                    - Abbreviations are not allowed (for example: “Abd” for “Abdul” is prohibited)<br/>
-                                    - Does not contain numbers or symbols (e.g., “@” or “#”)<br/>
-                                    - Does not contain academic or religious titles, such as S.Pd, Dr, S.H, etc<br/>
-                                    <br/>
-                                    Note: Always check the latest regulations, as they may be updated at any time.<br/>
-                                    This system accesses citizen data from the <a href="https://dukcapil.kemendagri.go.id/page/read/data-kependudukan" target='_blank'>
-                                        Department of Population and Civil Registration
-                                    </a> Database in real time.
-                                </div>
-                                <div style={{marginTop:'32px'}}>
-                                    For Example:
-                                </div>
-                                <Image
-                                    width={756}
-                                    height={269}
-                                    src="http://localhost:5173/fullname_example.png"
-                                />
-                            </Col>
-                            <Col span={12}>
-                                {/* right col */}
-                            </Col>
-                        </Row>
-                    </Form>
-                    {/* content end */}
+                        
+                        {/* content start */}
+                        <Form
+                            initValues={initValues}
+                            style={{ padding: 10, width: '100%' }}
+                            onValueChange={(v)=>console.log(v)}
+                        >
+                            <Row>
+                                <Col span={12}>
+                                    Check the eligible Baby Name for birth certificate registration.
+                                    <Input
+                                        field="name"
+                                        label="Requested Full Name"
+                                        initValue={'Srikandi Ayu'}
+                                        style={style}
+                                        trigger='blur'
+                                        rules={[
+                                            { max: 60, message: 'maximum 60 characters' },
+                                            { validator: (rule, value) => value.trim().split(/\s+/).length >= 2, message: 'should contain at least 2 words' }
+                                        ]}
+                                    />
+                                    <Button type='primary' theme='solid' onClick={showDialog}>Submit</Button>
+                                    <Modal
+                                        title="❌ Rejected"
+                                        // title="✅ Accepted"
+                                        visible={visible}
+                                        onOk={handleOk}
+                                        afterClose={handleAfterClose} //>=1.16.0
+                                        onCancel={handleCancel}
+                                        closeOnEsc={true}
+                                    >
+                                        This name has already been used by 47 other citizens.
+                                        <br />
+                                        Please choose an alternative.
+                                    </Modal>
+                                    <div style={{color:'rgb(249,57,32)', marginTop:'32px'}}>
+                                        According to <a href="https://peraturan.bpk.go.id/Details/210274/permendagri-no-73-tahun-2022" target="_blank">
+                                            Regulation of the Minister of Home Affairs Number 73 of 2022, Indonesia
+                                        </a><br/>
+                                        - Name must be at least 2 words and a maximum of 60 characters (including spaces)<br/>
+                                        - Using Latin letters according to Indonesian spelling<br/>
+                                        - Abbreviations are not allowed (for example: “Abd” for “Abdul” is prohibited)<br/>
+                                        - Does not contain numbers or symbols (e.g., “@” or “#”)<br/>
+                                        - Does not contain academic or religious titles, such as S.Pd, Dr, S.H, etc<br/>
+                                        <br/>
+                                        Note: Always check the latest regulations, as they may be updated at any time.<br/>
+                                        This system accesses citizen data from the <a href="https://dukcapil.kemendagri.go.id/page/read/data-kependudukan" target='_blank'>
+                                            Department of Population and Civil Registration
+                                        </a> Database in real time.
+                                    </div>
+                                    <div style={{marginTop:'32px'}}>
+                                        For Example:
+                                    </div>
+                                    <Image
+                                        width={756}
+                                        height={269}
+                                        src="http://localhost:5173/fullname_example.png"
+                                    />
+                                </Col>
+                                <Col span={12}>
+                                    {/* right col */}
+                                </Col>
+                            </Row>
+                        </Form>
+                        {/* content end */}
 
-                </div>
-            </Content>
+                    </div>
+                </Content>
+            </Layout>
             <Footer
                 style={{
                     display: 'flex',
@@ -200,8 +235,8 @@ function App() {
                     <span>Copyright © 2025 University </span>
                 </span>
                 <span>
-                    <span style={{ marginRight: '24px' }}>Kambey, Feldy Judah</span>
-                    <span>Public Management Thesis</span>
+                    <span style={{ marginRight: '24px' }}>Public Management Thesis</span>
+                    <span>VeriBirthName</span>
                 </span>
             </Footer>
         </Layout>
