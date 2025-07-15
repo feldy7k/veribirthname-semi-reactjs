@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { IconSemiLogo, IconBell, IconHelpCircle, IconBytedanceLogo, IconHome, IconHistogram, IconLive, IconSetting } from '@douyinfe/semi-icons';
+import { IconSemiLogo, IconBell, IconHelpCircle, IconBytedanceLogo, IconHome, IconFile, IconLive, IconSetting } from '@douyinfe/semi-icons';
 import { Layout, Nav, Button, Breadcrumb, Skeleton, Avatar, Modal, Form, Col, Row, Space, Image, ImagePreview } from '@douyinfe/semi-ui';
 
 function App() {
@@ -102,7 +102,7 @@ function App() {
                                     marginRight: '12px',
                                 }}
                             /> */}
-                            <span style={{marginRight:'10px', fontSize:'15px'}}>
+                            <span style={{marginRight:'10px', fontSize:'14px'}}>
                                 Feldy Judah Kambey | Administrator
                             </span>
                             <Avatar color="blue" size="small">
@@ -119,7 +119,7 @@ function App() {
                         defaultSelectedKeys={['Home']}
                         items={[
                             { itemKey: 'Home', text: 'Home 首页', icon: <IconHome size="large" /> },
-                            // { itemKey: 'Histogram', text: '基础数据', icon: <IconHistogram size="large" /> },
+                            { itemKey: 'Birth Cert', text: 'Birth Cert 出生证明', icon: <IconFile size="large" /> },
                             // { itemKey: 'Live', text: '测试功能', icon: <IconLive size="large" /> },
                             // { itemKey: 'Setting', text: '设置', icon: <IconSetting size="large" /> },
                         ]}
@@ -144,7 +144,7 @@ function App() {
                         style={{
                             borderRadius: '10px',
                             border: '1px solid var(--semi-color-border)',
-                            height: '69vh',
+                            height: '70vh',
                             padding: '32px',
                         }}
                     >
