@@ -126,7 +126,7 @@ function App() {
                                 Check the eligible Baby Name for birth certificate registration.
                                 <Input
                                     field="name"
-                                    label="Full Name"
+                                    label="Requested Full Name"
                                     initValue={'Srikandi Ayu'}
                                     style={style}
                                     trigger='blur'
@@ -150,7 +150,9 @@ function App() {
                                     Please choose an alternative.
                                 </Modal>
                                 <div style={{color:'rgb(249,57,32)', marginTop:'32px'}}>
-                                    According to <b>Permendagri Regulation No. 73 of 2022, Indonesia</b><br/>
+                                    According to <a href="https://peraturan.bpk.go.id/Details/210274/permendagri-no-73-tahun-2022" target="_blank">
+                                        Regulation of the Minister of Home Affairs Number 73 of 2022, Indonesia
+                                    </a><br/>
                                     - Name must be at least 2 words and a maximum of 60 characters (including spaces)<br/>
                                     - Using Latin letters according to Indonesian spelling<br/>
                                     - Abbreviations are not allowed (for example: “Abd” for “Abdul” is prohibited)<br/>
@@ -158,7 +160,9 @@ function App() {
                                     - Does not contain academic or religious titles, such as S.Pd, Dr, S.H, etc<br/>
                                     <br/>
                                     Note: Always check the latest regulations, as they may be updated at any time.<br/>
-                                    This system accesses citizen data from the Indonesian civil registry (Disdukcapil) database.
+                                    This system accesses citizen data from the <a href="https://dukcapil.kemendagri.go.id/page/read/data-kependudukan" target='_blank'>
+                                        Department of Population and Civil Registration
+                                    </a> Database in real time.
                                 </div>
                                 <div style={{marginTop:'32px'}}>
                                     For Example:
