@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { Layout, Nav, Button, Breadcrumb, Skeleton, Avatar, Modal, Form, Col, Row, Space } from '@douyinfe/semi-ui';
+import { Layout, Nav, Button, Breadcrumb, Skeleton, Avatar, Modal, Form, Col, Row, Space, Image, ImagePreview } from '@douyinfe/semi-ui';
 import { IconSemiLogo, IconBell, IconHelpCircle, IconBytedanceLogo, IconHome, IconLive, IconSetting } from '@douyinfe/semi-icons';
 
 function App() {
@@ -123,32 +123,56 @@ function App() {
                     >
                         <Row>
                             <Col span={12}>
-                                Check Baby's name for birth certificate registration
+                                Check the eligible Baby Name for birth certificate registration.
                                 <Input
                                     field="name"
                                     label="Full Name"
                                     initValue={'Srikandi Ayu'}
                                     style={style}
                                     trigger='blur'
+                                    rules={[
+                                        { max: 60, message: 'maximum 60 characters' },
+                                        { validator: (rule, value) => value.trim().split(/\s+/).length >= 2, message: 'should contain at least 2 words' }
+                                    ]}
+                                />
+                                <Button type='primary' theme='solid' onClick={showDialog}>Submit</Button>
+                                <Modal
+                                    title="❌ Rejected"
+                                    // title="✅ Accepted"
+                                    visible={visible}
+                                    onOk={handleOk}
+                                    afterClose={handleAfterClose} //>=1.16.0
+                                    onCancel={handleCancel}
+                                    closeOnEsc={true}
+                                >
+                                    This name has already been used by 47 other citizens.
+                                    <br />
+                                    Please choose an alternative.
+                                </Modal>
+                                <div style={{color:'rgb(249,57,32)', marginTop:'32px'}}>
+                                    According to <b>Permendagri Regulation No. 73 of 2022, Indonesia</b><br/>
+                                    - Name must be at least 2 words and a maximum of 60 characters (including spaces)<br/>
+                                    - Using Latin letters according to Indonesian spelling<br/>
+                                    - Abbreviations are not allowed (for example: “Abd” for “Abdul” is prohibited)<br/>
+                                    - Does not contain numbers or symbols (e.g., “@” or “#”)<br/>
+                                    - Does not contain academic or religious titles, such as S.Pd, Dr, S.H, etc<br/>
+                                    <br/>
+                                    Note: Always check the latest regulations, as they may be updated at any time.<br/>
+                                    This system accesses citizen data from the Indonesian civil registry (Disdukcapil) database.
+                                </div>
+                                <div style={{marginTop:'32px'}}>
+                                    For Example:
+                                </div>
+                                <Image
+                                    width={756}
+                                    height={269}
+                                    src="http://localhost:5173/fullname_example.png"
                                 />
                             </Col>
-                            
+                            <Col span={12}>
+                                {/* right col */}
+                            </Col>
                         </Row>
-                        <Space>
-                            <Button type='primary' theme='solid' onClick={showDialog}>Submit</Button>
-                            <Modal
-                                title="Modal"
-                                visible={visible}
-                                onOk={handleOk}
-                                afterClose={handleAfterClose} //>=1.16.0
-                                onCancel={handleCancel}
-                                closeOnEsc={true}
-                            >
-                                This name has already been used by 47 other citizens.
-                                <br />
-                                Please choose an alternative.
-                            </Modal>
-                        </Space>
                     </Form>
                     {/* content end */}
 
