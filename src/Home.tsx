@@ -22,34 +22,51 @@ function App() {
             }
         ]
     };
-    const { Section, Input, InputNumber, AutoComplete, Select, TreeSelect, Cascader, DatePicker, TimePicker, TextArea, CheckboxGroup, Checkbox, RadioGroup, Radio, Slider, Rating, Switch, TagInput } = Form;
+    const { Input, Select, DatePicker } = Form;
     const style = { width: '90%' };
 
-    const [visibleResult, setVisibleResult] = useState(false);
-    const showResult = () => {
-        setVisibleResult(true);
-    };
-    const resetResult = () => {
-        setVisibleResult(false);
+    const [visibleResultName, setVisibleResultName] = useState(false);
+    const handleSubmitName = () => {
+        setVisibleResultName(true);
+
+        // set var name
+        localStorage.removeItem("veribirthname_babyname");
+        localStorage.removeItem("veribirthname_fathername");
+        localStorage.removeItem("veribirthname_mothername");
+        localStorage.setItem("veribirthname_babyname", valueFullName.toUpperCase());
+        localStorage.setItem("veribirthname_fathername", valueFatherName.toUpperCase());
+        localStorage.setItem("veribirthname_mothername", valueMotherName.toUpperCase());
     };
 
+    const handleReset = () => {
+        setVisibleResultName(false);
+    }
+
+    // set input baby full name
     const [valueFullName, setValueFullName] = useState('Srikandi Ayu');
     const handleChangeFullName = (value, event) => {
         setValueFullName(value);
         
-        if(visibleResult === true){
-            setVisibleResult(false);
+        if(visibleResultName === true){
+            setVisibleResultName(false);
         }
+    };
+
+    // additional field
+    const [valueFatherName, setValueFatherName] = useState('Ardy Prasetya');
+    const handleChangeFatherName = (value, event) => {
+        setValueFatherName(value);
+    };
+    const [valueMotherName, setValueMotherName] = useState('Sri Suharti');
+    const handleChangeMotherName = (value, event) => {
+        setValueMotherName(value);
     };
 
     const navigate = useNavigate();
 
-    const handleNavigate = () => {
-        navigate("/birthCert", {
-            state: {
-                fullname: valueFullName
-            },
-        });
+    const handlePrintBirthCert = () =>
+    {
+        window.open("http://localhost:5173/BirthCert.html", "_blank");
     }
 
     //popconfirm
@@ -136,7 +153,7 @@ function App() {
                         style={{
                             borderRadius: '10px',
                             border: '1px solid var(--semi-color-border)',
-                            height: '70vh',
+                            minHeight: '70vh',
                             padding: '32px',
                         }}
                     >
@@ -151,10 +168,10 @@ function App() {
                                 <Col
                                     xs={24} sm={24} md={24} lg={12} xl={12} xxl={12}
                                 >
-                                    Check the eligible Baby Name for birth certificate registration.
+                                    Check the eligible Baby Name for birth certificate registration:
                                     <Input
                                         field="fullname"
-                                        label="Requested Full Name"
+                                        label="Baby Full Name"
                                         initValue={valueFullName}
                                         value={valueFullName}
                                         onChange={handleChangeFullName}
@@ -165,9 +182,11 @@ function App() {
                                             { validator: (rule, value) => value.trim().split(/\s+/).length >= 2, message: 'should contain at least 2 words' }
                                         ]}
                                     />
-                                    <Button type='primary' theme='solid' onClick={showResult}>Submit</Button>
-                                    
-                                    <div style={{ display:visibleResult==true?'block':'none', width: 512, padding: 0, marginTop:'32px', border: 'none' }}>
+                                    <Button type='primary' theme='solid' onClick={handleSubmitName}>Submit</Button>
+                                    <Button type='primary' onClick={handleReset} style={{marginLeft:"12px"}}>Reset</Button>
+                                    <div style={{display:(visibleResultName===true ? 'block' : 'none'), width: 512, padding: 0, marginTop:'32px', border: 'none' }}>
+                                        <div>Result:</div>
+                                        <br/>
                                         <Banner 
                                             fullMode={false} type="danger" bordered icon={null} closeIcon={null} 
                                             title={<div style={{ fontWeight: 600, fontSize: '14px', lineHeight: '20px' }}>❌ Rejected </div>}
@@ -188,7 +207,39 @@ function App() {
                                                 </div>
                                             }
                                         />
-                                        <Button type='primary' theme='solid' onClick={handleNavigate} style={{marginTop:'24px'}}>Create Birth Certificate</Button>
+                                        <br/><br/>
+                                        Additional Information Required:
+                                        <Select field="gender" style={style} label='Gender（Select）' placeholder='Gender'>
+                                            <Select.Option value="P">Perempuan</Select.Option>
+                                            <Select.Option value="L">Laki-Laki</Select.Option>
+                                        </Select>
+                                        <Select field="placeofbirth" style={style} label='Place of Birth（Select）' placeholder='Place of Birth'>
+                                            <Select.Option value="JKT1">Jakarta Pusat</Select.Option>
+                                            <Select.Option value="JKT2">Jakarta Utara</Select.Option>
+                                            <Select.Option value="JKT3">Jakarta Selatan</Select.Option>
+                                            <Select.Option value="JKT4">Jakarta Barat</Select.Option>
+                                            <Select.Option value="TGR">Tangerang</Select.Option>
+                                        </Select>
+                                        <DatePicker field="date" label='Date of Birth（DatePicker）' style={style} initValue={new Date()} placeholder='Date of Birth' />
+                                        <Input
+                                            field="fathername"
+                                            label="Father Name"
+                                            initValue={valueFatherName}
+                                            value={valueFatherName}
+                                            onChange={handleChangeFatherName}
+                                            style={style}
+                                            trigger='blur'
+                                        />
+                                        <Input
+                                            field="mothername"
+                                            label="Mother Name"
+                                            initValue={valueMotherName}
+                                            value={valueMotherName}
+                                            onChange={handleChangeMotherName}
+                                            style={style}
+                                            trigger='blur'
+                                        />
+                                        <Button type='primary' theme='solid' onClick={handlePrintBirthCert} style={{marginTop:'24px'}}>Create Birth Certificate</Button>
                                     </div>
                                     
                                 </Col>
@@ -196,8 +247,6 @@ function App() {
                                     xs={24} sm={24} md={24} lg={12} xl={12} xxl={12}
                                 >
                                     <div style={{color:'var(--semi-color-danger)', marginTop:'32px'}}>
-                                        Since Indonesia's population has reached 284 million, this system might be implemented per province to make full-name data processing lighter and faster<br/>
-                                        <br/>
                                         According to <a href="https://peraturan.bpk.go.id/Details/210274/permendagri-no-73-tahun-2022" target="_blank">
                                             Regulation of the Minister of Home Affairs Number 73 of 2022, Indonesia
                                         </a><br/>
@@ -207,7 +256,10 @@ function App() {
                                         • Does not contain numbers or symbols (e.g., “@” or “#”)<br/>
                                         • Does not contain academic or religious titles, such as S.Pd, Dr, S.H, etc<br/>
                                         <br/>
-                                        Note: Always check the latest regulations, as they may be updated at any time.
+                                        Since Indonesia's population has reached 284 million in 2025,<br/>
+                                        This system might be implemented 'Per Province' to make full-name data processing lighter and faster<br/>
+                                        <br/>
+                                        Note: Always check the latest regulations, as they may be updated at any time
                                     </div>
                                     <div style={{marginTop:'32px'}}>
                                         For Example:
