@@ -96,22 +96,6 @@ function App() {
                             
                         </span>
                         <Nav.Footer>
-                            {/* <Button
-                                theme="borderless"
-                                icon={<IconBell size="large" />}
-                                style={{
-                                    color: 'var(--semi-color-text-2)',
-                                    marginRight: '12px',
-                                }}
-                            />
-                            <Button
-                                theme="borderless"
-                                icon={<IconHelpCircle size="large" />}
-                                style={{
-                                    color: 'var(--semi-color-text-2)',
-                                    marginRight: '12px',
-                                }}
-                            /> */}
                             <span style={{marginRight:'10px', fontSize:'14px'}}>
                                 Feldy Judah Kambey | Administrator
                             </span>
@@ -129,7 +113,7 @@ function App() {
                         defaultSelectedKeys={['Home']}
                         items={[
                             { itemKey: 'Home', text: 'Home 首页', icon: <IconHome size="large" />, onClick: () => navigate('/home')},
-                            { itemKey: 'Birth Cert', text: 'Birth Cert 出生证明', icon: <IconFile size="large" />, onClick: () => navigate('/birthCert') },
+                            // { itemKey: 'Birth Cert', text: 'Birth Cert 出生证明', icon: <IconFile size="large" />, onClick: () => navigate('/birthCert') },
                             // { itemKey: 'Live', text: '测试功能', icon: <IconLive size="large" /> },
                             // { itemKey: 'Setting', text: '设置', icon: <IconSetting size="large" /> },
                         ]}
@@ -189,7 +173,8 @@ function App() {
                                                 <div>
                                                     This name <b>Srikandi Ayu</b> has already been used.<br/>
                                                     Please choose an alternative.
-                                                </div>}
+                                                </div>
+                                            }
                                         />
                                         <br/>
                                         <Banner 
@@ -198,8 +183,10 @@ function App() {
                                             description={
                                                 <div>
                                                     This name <b>Srikandi Ayu</b> available to use.
-                                                </div>}
+                                                </div>
+                                            }
                                         />
+                                        <Button type='primary' theme='solid' onClick={() => navigate('/birthCert')} style={{marginTop:'24px'}}>Create Birth Certificate</Button>
                                     </div>
                                     {/* <Modal
                                         title="❌ Rejected"
