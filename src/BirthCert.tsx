@@ -50,8 +50,8 @@ function BirthCert() {
                         Pejabat Pencatatan Sipil <br/>
                         <b>KOTA JAKARTA PUSAT</b><br/><br/>
                         <img src="http://localhost:5173/qrcode.png" alt="QR Code" style={{width:'105px', height:'105px'}}/><br/>
-                        <b>Drs. H. ABU BAKAR, M.Si</b><br/>
-                        NIP. 196204151993031003
+                        <b>Drs. BUDI ABDUL, M.Si</b><br/>
+                        NIP. 1962XXXXXXXXXXXXXX
                     </p>
                 </div>
                 <br/><br/>

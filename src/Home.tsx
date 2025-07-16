@@ -19,47 +19,27 @@ function App() {
                 size: '130KB',
                 preview: true,
                 url: 'https://lf3-static.bytednsdoc.com/obj/eden-cn/ptlz_zlp/ljhwZthlaukjlkulzlp/root-web-sites/vigo.png'
-            },
-            {
-                uid: '2',
-                name: 'resso.jpeg',
-                status: 'validateFail',
-                size: '222KB',
-                percent: 50,
-                preview: true,
-                fileInstance: new File([new ArrayBuffer(2048)], 'resso.jpeg', { type: 'image/jpeg' }),
-                url: 'https://lf3-static.bytednsdoc.com/obj/eden-cn/ptlz_zlp/ljhwZthlaukjlkulzlp/root-web-sites/Resso.png'
-            },
-            {
-                uid: '3',
-                name: 'douyin.jpeg',
-                status: 'uploading',
-                size: '222KB',
-                percent: 50,
-                preview: true,
-                fileInstance: new File([new ArrayBuffer(2048)], 'dy.jpeg', { type: 'image/jpeg' }),
-                url: 'https://lf3-static.bytednsdoc.com/obj/eden-cn/ptlz_zlp/ljhwZthlaukjlkulzlp/root-web-sites/dy.png'
             }
         ]
     };
     const { Section, Input, InputNumber, AutoComplete, Select, TreeSelect, Cascader, DatePicker, TimePicker, TextArea, CheckboxGroup, Checkbox, RadioGroup, Radio, Slider, Rating, Switch, TagInput } = Form;
     const style = { width: '90%' };
 
-    const [visible, setVisible] = useState(false);
-    const showDialog = () => {
-        setVisible(true);
-    };
-    const handleOk = () => {
-        setVisible(false);
-        console.log('Ok button clicked');
-    };
-    const handleCancel = () => {
-        setVisible(false);
-        console.log('Cancel button clicked');
-    };
-    const handleAfterClose = () => {
-        console.log('After Close callback executed');
-    };
+    // const [visible, setVisible] = useState(false);
+    // const showDialog = () => {
+    //     setVisible(true);
+    // };
+    // const handleOk = () => {
+    //     setVisible(false);
+    //     console.log('Ok button clicked');
+    // };
+    // const handleCancel = () => {
+    //     setVisible(false);
+    //     console.log('Cancel button clicked');
+    // };
+    // const handleAfterClose = () => {
+    //     console.log('After Close callback executed');
+    // };
 
     const [visibleResult, setVisibleResult] = useState(false);
     const showResult = () => {
@@ -67,6 +47,15 @@ function App() {
     };
     const resetResult = () => {
         setVisibleResult(false);
+    };
+
+    const [valueFullName, setValueFullName] = useState('Srikandi Ayu');
+    const handleChangeFullName = (value, event) => {
+        setValueFullName(value);
+        
+        if(visibleResult === true){
+            setVisibleResult(false);
+        }
     };
 
     const navigate = useNavigate();
@@ -153,9 +142,11 @@ function App() {
                                 <Col span={12}>
                                     Check the eligible Baby Name for birth certificate registration.
                                     <Input
-                                        field="name"
+                                        field="fullname"
                                         label="Requested Full Name"
-                                        initValue={'Srikandi Ayu'}
+                                        initValue={valueFullName}
+                                        value={valueFullName}
+                                        onChange={handleChangeFullName}
                                         style={style}
                                         trigger='blur'
                                         rules={[
@@ -165,13 +156,13 @@ function App() {
                                     />
                                     <Button type='primary' theme='solid' onClick={showResult} style={{marginRight:'12px'}}>Submit</Button>
                                     <Button type='primary' onClick={resetResult}>Reset</Button>
-                                    <div style={{ display:visibleResult==true?'block':'none', width: 500, padding: 0, marginTop:'32px', border: 'none' }}>
+                                    <div style={{ display:visibleResult==true?'block':'none', width: 512, padding: 0, marginTop:'32px', border: 'none' }}>
                                         <Banner 
                                             fullMode={false} type="danger" bordered icon={null} closeIcon={null} 
                                             title={<div style={{ fontWeight: 600, fontSize: '14px', lineHeight: '20px' }}>❌ Rejected </div>}
                                             description={
                                                 <div>
-                                                    This name <b>Srikandi Ayu</b> has already been used.<br/>
+                                                    This name <b>{valueFullName}</b> has already been used.<br/>
                                                     Please choose an alternative.
                                                 </div>
                                             }
@@ -182,7 +173,7 @@ function App() {
                                             title={<div style={{ fontWeight: 600, fontSize: '14px', lineHeight: '20px' }}>✅ Accepted </div>}
                                             description={
                                                 <div>
-                                                    This name <b>Srikandi Ayu</b> available to use.
+                                                    This name <b>{valueFullName}</b> available to use.
                                                 </div>
                                             }
                                         />
