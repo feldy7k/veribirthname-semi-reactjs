@@ -175,7 +175,7 @@ function App() {
                                 </Col>
                                 <Col span={12}>
                                     <div style={{color:'var(--semi-color-danger)', marginTop:'32px'}}>
-                                        Since Indonesia's population has reached 280 million, this system might be implemented per province to make full-name data processing lighter and faster<br/>
+                                        Since Indonesia's population has reached 284 million, this system might be implemented per province to make full-name data processing lighter and faster<br/>
                                         <br/>
                                         According to <a href="https://peraturan.bpk.go.id/Details/210274/permendagri-no-73-tahun-2022" target="_blank">
                                             Regulation of the Minister of Home Affairs Number 73 of 2022, Indonesia
