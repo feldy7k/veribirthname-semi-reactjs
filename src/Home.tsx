@@ -187,7 +187,7 @@ function Home() {
                                     Check the eligible Baby Name for birth certificate registration:
                                     <Input
                                         field="fullname"
-                                        label="Baby Full Name"
+                                        label="Desired Full Name"
                                         initValue={valueFullName}
                                         onChange={handleChangeFullName}
                                         style={style}
@@ -200,82 +200,99 @@ function Home() {
                                     />
                                     <Button type='primary' theme='solid' htmlType="submit">Submit</Button>
                                     <Button type='primary' onClick={handleReset} style={{marginLeft:"12px"}}>Reset</Button>
-                                    <div style={{display:(visibleResultName===true ? 'block' : 'none'), width: 360, padding: 0, marginTop:'32px', border: 'none' }}>
+
+                                    <div style={{display:(visibleResultName===true ? 'block' : 'none'), padding: 0, marginTop:'20px', border: 'none' }}>
                                         <div>Result:</div>
                                         <br/>
-                                        <Banner 
-                                            fullMode={false} type="danger" bordered icon={null} closeIcon={null} 
-                                            title={<div style={{ fontWeight: 600, fontSize: '14px', lineHeight: '20px' }}>❌ Rejected </div>}
-                                            description={
-                                                <div>
-                                                    This name <b>{valueFullName}</b> has already been used.<br/>
-                                                    Please choose an alternative.
-                                                </div>
-                                            }
-                                        />
-                                        <br/>
-                                        <Banner 
-                                            fullMode={false} type="success" bordered icon={null} closeIcon={null} 
-                                            title={<div style={{ fontWeight: 600, fontSize: '14px', lineHeight: '20px' }}>✅ Accepted </div>}
-                                            description={
-                                                <div>
-                                                    This name <b>{valueFullName}</b> available to use.
-                                                </div>
-                                            }
-                                        />
+                                        <div style={{width:370}}>
+                                            <Banner 
+                                                fullMode={false} type="danger" bordered icon={null} closeIcon={null} 
+                                                title={<div style={{ fontWeight: 600, fontSize: '14px', lineHeight: '20px' }}>❌ Rejected </div>}
+                                                description={
+                                                    <div>
+                                                        This name <b>{valueFullName}</b> has already been used.<br/>
+                                                        Please choose an alternative.
+                                                    </div>
+                                                }
+                                            />
+                                            <br/>
+                                            <Banner 
+                                                fullMode={false} type="success" bordered icon={null} closeIcon={null} 
+                                                title={<div style={{ fontWeight: 600, fontSize: '14px', lineHeight: '20px' }}>✅ Accepted </div>}
+                                                description={
+                                                    <div>
+                                                        This name <b>{valueFullName}</b> available to use.
+                                                    </div>
+                                                }
+                                            />
+                                        </div>
                                         <br/><br/>
-                                        Additional Information Required:
-                                        <Select field="gender" style={style} label='Gender（Select）' placeholder='Gender'>
-                                            <Select.Option value="P">Perempuan</Select.Option>
-                                            <Select.Option value="L">Laki-Laki</Select.Option>
-                                        </Select>
-                                        <Select field="placeofbirth" style={style} label='Place of Birth（Select）' placeholder='Place of Birth'>
-                                            <Select.Option value="JKT1">Jakarta Pusat</Select.Option>
-                                            <Select.Option value="JKT2">Jakarta Utara</Select.Option>
-                                            <Select.Option value="JKT3">Jakarta Selatan</Select.Option>
-                                            <Select.Option value="JKT4">Jakarta Barat</Select.Option>
-                                            <Select.Option value="TGR">Tangerang</Select.Option>
-                                        </Select>
-                                        <DatePicker field="date" label='Date of Birth（DatePicker）' style={style} initValue={new Date()} placeholder='Date of Birth' />
-                                        <Input
-                                            field="fathername"
-                                            label="Father Name"
-                                            initValue={valueFatherName}
-                                            //value={valueFatherName}
-                                            onChange={handleChangeFatherName}
-                                            style={style}
-                                            trigger='blur'
-                                        />
-                                        <Input
-                                            field="mothername"
-                                            label="Mother Name"
-                                            initValue={valueMotherName}
-                                            //value={valueMotherName}
-                                            onChange={handleChangeMotherName}
-                                            style={style}
-                                            trigger='blur'
-                                        />
-                                        <Input
-                                            field="officername"
-                                            label="Officer Name"
-                                            initValue={valueOfficerName}
-                                            //value={valueOfficerName}
-                                            onChange={handleChangeOfficerName}
-                                            style={style}
-                                            trigger='blur'
-                                            disabled
-                                        />
-                                        <Input
-                                            field="officernip"
-                                            label="Officer NIP."
-                                            initValue={valueOfficerNIP}
-                                            //value={valueOfficerNIP}
-                                            onChange={handleChangeOfficerNIP}
-                                            style={style}
-                                            trigger='blur'
-                                            disabled
-                                        />
-                                        <Button type='primary' theme='solid' onClick={handlePrintBirthCert} style={{marginTop:'24px'}}>Create Birth Certificate</Button>
+                                        <div>Additional Information Required:</div>
+                                        <Row>
+                                            <Col sm={24} md={12}>
+                                                <Select field="gender" style={style} label='Gender（Select）' placeholder='Gender'>
+                                                    <Select.Option value="P">Perempuan</Select.Option>
+                                                    <Select.Option value="L">Laki-Laki</Select.Option>
+                                                </Select>
+                                                <Select field="placeofbirth" style={style} label='Place of Birth（Select）' placeholder='Place of Birth'>
+                                                    <Select.Option value="JKT1">Jakarta Pusat</Select.Option>
+                                                    <Select.Option value="JKT2">Jakarta Utara</Select.Option>
+                                                    <Select.Option value="JKT3">Jakarta Selatan</Select.Option>
+                                                    <Select.Option value="JKT4">Jakarta Barat</Select.Option>
+                                                    <Select.Option value="TGR">Tangerang</Select.Option>
+                                                </Select>
+                                                <DatePicker field="date" label='Date of Birth（DatePicker）' style={style} initValue={new Date()} placeholder='Date of Birth' />
+                                                <Input
+                                                    field="childno"
+                                                    label="Child No"
+                                                    initValue={"FIRST"}
+                                                    //value={}
+                                                    style={style}
+                                                    trigger='blur'
+                                                />
+                                                <Button type='primary' theme='solid' onClick={handlePrintBirthCert} style={{marginTop:'24px'}}>Create Birth Certificate</Button>
+                                            </Col>
+                                            <Col sm={24} md={12}>
+                                                <Input
+                                                    field="fathername"
+                                                    label="Father Name"
+                                                    initValue={valueFatherName}
+                                                    //value={valueFatherName}
+                                                    onChange={handleChangeFatherName}
+                                                    style={style}
+                                                    trigger='blur'
+                                                />
+                                                <Input
+                                                    field="mothername"
+                                                    label="Mother Name"
+                                                    initValue={valueMotherName}
+                                                    //value={valueMotherName}
+                                                    onChange={handleChangeMotherName}
+                                                    style={style}
+                                                    trigger='blur'
+                                                />
+                                                <Input
+                                                    field="officername"
+                                                    label="Officer Name"
+                                                    initValue={valueOfficerName}
+                                                    //value={valueOfficerName}
+                                                    onChange={handleChangeOfficerName}
+                                                    style={style}
+                                                    trigger='blur'
+                                                    disabled
+                                                />
+                                                <Input
+                                                    field="officernip"
+                                                    label="Officer NIP."
+                                                    initValue={valueOfficerNIP}
+                                                    //value={valueOfficerNIP}
+                                                    onChange={handleChangeOfficerNIP}
+                                                    style={style}
+                                                    trigger='blur'
+                                                    disabled
+                                                />
+                                            </Col>
+                                        </Row>
                                     </div>
                                 </Col>
                                 
@@ -288,12 +305,8 @@ function Home() {
                                         • Using Latin letters according to Indonesian spelling<br/>
                                         • Abbreviations are not allowed (for example: “Abd” for “Abdul” is prohibited)<br/>
                                         • Does not contain numbers or symbols (e.g., "1", "2", “@” or “#”)<br/>
-                                        <br/>
                                         For adults who wish to change their name:<br/>
                                         • Does not contain academic or religious titles, such as S.Pd, Dr., S.H., H., Hj., Pdt., etc<br/>
-                                        <br/>
-                                        Since Indonesia's population has reached 284 million in 2025,<br/>
-                                        This system might be implemented 'Per Province' to make full-name data processing lighter and faster<br/>
                                         <br/>
                                         Note: Always check the latest regulations, as they may be updated at any time
                                     </div>
