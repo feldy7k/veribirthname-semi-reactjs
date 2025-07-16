@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Layout, Button } from '@douyinfe/semi-ui';
 
 function BirthCert() {
@@ -11,8 +11,15 @@ function BirthCert() {
         console.log('Print button clicked');
     };
 
+    const navigate = useNavigate();
+
+    const back = () => {
+        navigate("/home");
+    };
+
     return (
         <>
+            <Button type='primary' onClick={back} style={{width:'100px',marginLeft:'12px', marginBottom:'12px'}}>Back</Button>
             <Button type='primary' theme='solid' onClick={print} style={{width:'100px',marginLeft:'12px', marginBottom:'12px'}}>Print</Button>
             {/* Ukuran A4 pada 100 DPI = 827 x 1169 pixel */}
             <Layout style={{ border: '1px solid var(--semi-color-border)', height:1169, width: 827, padding:'30px 60px', textAlign:'center', fontSize:'14px'}}>
@@ -37,22 +44,24 @@ function BirthCert() {
                 <div>Berdasarkan Akta Kelahiran Nomor <b>XXXX-XX-XXXXXXXX-0XXX</b></div>
                 <div><i>By virtue of Birth Certificate Number </i><b>XXXX-XX-XXXXXXXX-0XXX</b></div><br/>
                 <div>bahwa di <b>JAKARTA PUSAT</b> pada tanggal <b>SEMBILAN</b> bulan <b>DESEMBER</b> tahun <b>DUA RIBU SEMBILAN BELAS</b></div>
-                <div><i>at <b>Central Jakarta</b> on date THE NINTH OF DECEMBER on year TWO THOUSAND AND NINETEEN</i></div><br/>
+                <div><i>at <b>CENTRAL JAKARTA</b> on date <b>THE NINTH</b> of <b>DECEMBER</b> on year <b>TWO THOUSAND AND NINETEEN</b></i></div><br/>
                 <div> 09 DESEMBER 2019</div><br/>
                 <div>telah lahir <b>{fullname.toUpperCase()}</b></div>
-                <div><i>was born</i> <b>{fullname.toUpperCase()}</b></div>
+                <div><i>the birth of</i> <b>{fullname.toUpperCase()}</b></div>
                 <br/>
-                <div>anak ke SATU, PEREMPUAN DARI AYAH <b>ARDI PRASETYA</b> DAN IBU <b>AYU KARTIKASARI</b></div>
-                <div><i>child no FIRST, DAUGHTER FROM FATHER </i> <b>ARDI PRASETYA</b> <i>AND MOTHER</i> <b>AYU KARTIKASARI</b></div>
+                <div style={{fontSize:'11px',color:'var(--semi-color-primary)'}}>Full Name verified Unique by VeriBirthName ✔</div>
+                <br/>
+                <div>anak ke, SATU PEREMPUAN DARI AYAH <b>ARDI PRASETYA</b> DAN IBU <b>AYU KARTIKASARI</b></div>
+                <div><i>child no, FIRST DAUGHTER OF FATHER </i> <b>ARDI PRASETYA</b> <i>AND MOTHER</i> <b>AYU KARTIKASARI</b></div>
                 <br/><br/>
                 <div className='right-bottom' style={{fontSize:'13px',textAlign:'left',marginLeft:'410px'}}>
                     <div>Kutipan ini dikeluarkan di <b>JAKARTA PUSAT</b></div>
-                    <div><i>The excerpt is issued at </i>CENTRAL JAKARTA</div><br/>
-                    <div>pada tanggal <b>DUA BELAS OKTOBER</b> tahun <b>DUA RIBU DUA PULUH</b></div>
-                    <div><i>on date THE TWELFTH OF OCTOBER on year TWO THOUSAND AND TWENTY</i></div>
+                    <div><i>The excerpt is issued at </i><b>CENTRAL JAKARTA</b></div><br/>
+                    <div>pada tanggal <b>DUA BELAS DESEMBER</b> tahun <b>DUA RIBU SEMBILAN BELAS</b></div>
+                    <div><i>on date <b>THE TWELFTH</b> of <b>DESEMBER</b> on year <b>TWO THOUSAND AND NINETEEN</b></i></div>
                     <p>
                         Pejabat Pencatatan Sipil <br/>
-                        <b>KOTA JAKARTA PUSAT</b><br/><br/>
+                        KOTA JAKARTA PUSAT<br/><br/>
                         <img src="http://localhost:5173/qrcode.png" alt="QR Code" style={{width:'95px', height:'95px'}}/><br/>
                         <b>Drs. BUDI ABDUL, M.Si</b><br/>
                         NIP. 1962XXXXXXXXXXXXXX
@@ -63,7 +72,6 @@ function BirthCert() {
                     yang diterbitkan oleh Balai Sertifikasi Elektronik (BSrE), BSSN
                 </div>
                 <br/>
-                <div style={{fontSize:'11px'}}>verified by VeriBirthName</div>
             </Layout>
         </>
     );

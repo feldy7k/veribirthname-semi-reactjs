@@ -25,22 +25,6 @@ function App() {
     const { Section, Input, InputNumber, AutoComplete, Select, TreeSelect, Cascader, DatePicker, TimePicker, TextArea, CheckboxGroup, Checkbox, RadioGroup, Radio, Slider, Rating, Switch, TagInput } = Form;
     const style = { width: '90%' };
 
-    // const [visible, setVisible] = useState(false);
-    // const showDialog = () => {
-    //     setVisible(true);
-    // };
-    // const handleOk = () => {
-    //     setVisible(false);
-    //     console.log('Ok button clicked');
-    // };
-    // const handleCancel = () => {
-    //     setVisible(false);
-    //     console.log('Cancel button clicked');
-    // };
-    // const handleAfterClose = () => {
-    //     console.log('After Close callback executed');
-    // };
-
     const [visibleResult, setVisibleResult] = useState(false);
     const showResult = () => {
         setVisibleResult(true);
@@ -187,23 +171,10 @@ function App() {
                                         />
                                         <Button type='primary' theme='solid' onClick={handleNavigate} style={{marginTop:'24px'}}>Create Birth Certificate</Button>
                                     </div>
-                                    {/* <Modal
-                                        title="❌ Rejected"
-                                        // title="✅ Accepted"
-                                        visible={visible}
-                                        onOk={handleOk}
-                                        afterClose={handleAfterClose} //>=1.16.0
-                                        onCancel={handleCancel}
-                                        closeOnEsc={true}
-                                    >
-                                        This name has already been used.
-                                        <br />
-                                        Please choose an alternative.
-                                    </Modal> */}
                                     
                                 </Col>
                                 <Col span={12}>
-                                    <div style={{color:'rgb(249,57,32)', marginTop:'32px'}}>
+                                    <div style={{color:'var(--semi-color-danger)', marginTop:'32px'}}>
                                         Since Indonesia's population has reached 280 million, this system might be implemented per province to make full-name data processing lighter and faster<br/>
                                         <br/>
                                         According to <a href="https://peraturan.bpk.go.id/Details/210274/permendagri-no-73-tahun-2022" target="_blank">
