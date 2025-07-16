@@ -1,8 +1,12 @@
 import React, {useState} from 'react';
+import { useLocation } from "react-router-dom";
 import { Layout, Button } from '@douyinfe/semi-ui';
 
 function BirthCert() {
-    
+
+    const location = useLocation();
+    const { fullname } = location.state || {};
+
     const print = () => {
         console.log('Print button clicked');
     };
@@ -35,8 +39,8 @@ function BirthCert() {
                 <div>bahwa di <b>JAKARTA PUSAT</b> pada tanggal <b>SEMBILAN</b> bulan <b>DESEMBER</b> tahun <b>DUA RIBU SEMBILAN BELAS</b></div>
                 <div><i>at <b>Central Jakarta</b> on date THE NINTH OF DECEMBER on year TWO THOUSAND AND NINETEEN</i></div><br/>
                 <div> 09 DESEMBER 2019</div><br/>
-                <div>telah lahir <b>SRIKANDI AYU</b></div>
-                <div><i>was born</i> <b>SRIKANDI AYU</b></div>
+                <div>telah lahir <b>{fullname.toUpperCase()}</b></div>
+                <div><i>was born</i> <b>{fullname.toUpperCase()}</b></div>
                 <br/>
                 <div>anak ke SATU, PEREMPUAN DARI AYAH <b>ARDI PRASETYA</b> DAN IBU <b>AYU KARTIKASARI</b></div>
                 <div><i>child no FIRST, DAUGHTER FROM FATHER </i> <b>ARDI PRASETYA</b> <i>AND MOTHER</i> <b>AYU KARTIKASARI</b></div>

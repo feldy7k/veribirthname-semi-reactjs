@@ -59,6 +59,14 @@ function App() {
     };
 
     const navigate = useNavigate();
+
+    const handleNavigate = () => {
+        navigate("/birthCert", {
+            state: {
+                fullname: valueFullName
+            },
+        });
+    }
     
     return (
         <Layout style={{ border: '1px solid var(--semi-color-border)' }}>
@@ -154,8 +162,8 @@ function App() {
                                             { validator: (rule, value) => value.trim().split(/\s+/).length >= 2, message: 'should contain at least 2 words' }
                                         ]}
                                     />
-                                    <Button type='primary' theme='solid' onClick={showResult} style={{marginRight:'12px'}}>Submit</Button>
-                                    <Button type='primary' onClick={resetResult}>Reset</Button>
+                                    <Button type='primary' theme='solid' onClick={showResult}>Submit</Button>
+                                    
                                     <div style={{ display:visibleResult==true?'block':'none', width: 512, padding: 0, marginTop:'32px', border: 'none' }}>
                                         <Banner 
                                             fullMode={false} type="danger" bordered icon={null} closeIcon={null} 
@@ -177,7 +185,7 @@ function App() {
                                                 </div>
                                             }
                                         />
-                                        <Button type='primary' theme='solid' onClick={() => navigate('/birthCert')} style={{marginTop:'24px'}}>Create Birth Certificate</Button>
+                                        <Button type='primary' theme='solid' onClick={handleNavigate} style={{marginTop:'24px'}}>Create Birth Certificate</Button>
                                     </div>
                                     {/* <Modal
                                         title="❌ Rejected"
