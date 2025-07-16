@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { IconSemiLogo, IconHome, IconMore, IconTickCircle, IconComment, IconClear } from '@douyinfe/semi-icons';
 import { Layout, Nav, Button, Breadcrumb, Avatar, Form, Col, Row, Image, ImagePreview, Banner, Table, Tag, Popconfirm } from '@douyinfe/semi-ui';
 
-function App() {
+function Home() {
     const { Header, Footer, Sider, Content } = Layout;
     
     const initValues = {
@@ -26,6 +26,7 @@ function App() {
     const style = { width: '90%' };
 
     const [visibleResultName, setVisibleResultName] = useState(false);
+
     const handleSubmitName = () => {
         setVisibleResultName(true);
 
@@ -33,18 +34,22 @@ function App() {
         localStorage.removeItem("veribirthname_babyname");
         localStorage.removeItem("veribirthname_fathername");
         localStorage.removeItem("veribirthname_mothername");
+
         localStorage.setItem("veribirthname_babyname", valueFullName.toUpperCase());
         localStorage.setItem("veribirthname_fathername", valueFatherName.toUpperCase());
         localStorage.setItem("veribirthname_mothername", valueMotherName.toUpperCase());
-    };
 
-    const handleReset = () => {
-        setVisibleResultName(false);
-    }
+        localStorage.removeItem("veribirthname_officername");
+        localStorage.removeItem("veribirthname_officernip");
+        
+        localStorage.setItem("veribirthname_officername", valueOfficerName.toUpperCase());
+        localStorage.setItem("veribirthname_officernip", valueOfficerNIP.toUpperCase());
+    };
 
     // set input baby full name
     const [valueFullName, setValueFullName] = useState('Srikandi Ayu');
-    const handleChangeFullName = (value, event) => {
+
+    const handleChangeFullName = (value) => {
         setValueFullName(value);
         
         if(visibleResultName === true){
@@ -52,14 +57,26 @@ function App() {
         }
     };
 
+    const handleReset = () => {
+        setVisibleResultName(false);
+    }
+
     // additional field
     const [valueFatherName, setValueFatherName] = useState('Ardy Prasetya');
-    const handleChangeFatherName = (value, event) => {
+    const handleChangeFatherName = (value) => {
         setValueFatherName(value);
     };
     const [valueMotherName, setValueMotherName] = useState('Sri Suharti');
-    const handleChangeMotherName = (value, event) => {
+    const handleChangeMotherName = (value) => {
         setValueMotherName(value);
+    };
+    const [valueOfficerName, setValueOfficerName] = useState('Feldy Judah Kambey');
+    const handleChangeOfficerName = (value) => {
+        setValueOfficerName(value);
+    };
+    const [valueOfficerNIP, setValueOfficerNIP] = useState('987XXXXXXXXXXXXXXXXX');
+    const handleChangeOfficerNIP = (value) => {
+        setValueOfficerNIP(value);
     };
 
     const navigate = useNavigate();
@@ -163,28 +180,27 @@ function App() {
                             initValues={initValues}
                             style={{ padding: 10, width: '100%' }}
                             onValueChange={(v)=>console.log(v)}
+                            onSubmit={handleSubmitName}
                         >
                             <Row>
-                                <Col
-                                    xs={24} sm={24} md={24} lg={12} xl={12} xxl={12}
-                                >
+                                <Col xs={24} sm={24} md={24} lg={12} xl={12} xxl={12}>
                                     Check the eligible Baby Name for birth certificate registration:
                                     <Input
                                         field="fullname"
                                         label="Baby Full Name"
                                         initValue={valueFullName}
-                                        value={valueFullName}
                                         onChange={handleChangeFullName}
                                         style={style}
                                         trigger='blur'
+                                        maxLength={60}
                                         rules={[
-                                            { max: 60, message: 'maximum 60 characters' },
-                                            { validator: (rule, value) => value.trim().split(/\s+/).length >= 2, message: 'should contain at least 2 words' }
+                                            { validator: (rule, value) => (value.trim().split(/\s+/).length >= 2), message: 'should contain at least 2 words' },
+                                            { validator: (rule, value) => (/[^a-zA-Z ]/.test(value)===false), message: 'numbers or symbols (e.g., "1", "2", “@” or “#”) are not allowed' }
                                         ]}
                                     />
-                                    <Button type='primary' theme='solid' onClick={handleSubmitName}>Submit</Button>
+                                    <Button type='primary' theme='solid' htmlType="submit">Submit</Button>
                                     <Button type='primary' onClick={handleReset} style={{marginLeft:"12px"}}>Reset</Button>
-                                    <div style={{display:(visibleResultName===true ? 'block' : 'none'), width: 512, padding: 0, marginTop:'32px', border: 'none' }}>
+                                    <div style={{display:(visibleResultName===true ? 'block' : 'none'), width: 360, padding: 0, marginTop:'32px', border: 'none' }}>
                                         <div>Result:</div>
                                         <br/>
                                         <Banner 
@@ -225,7 +241,7 @@ function App() {
                                             field="fathername"
                                             label="Father Name"
                                             initValue={valueFatherName}
-                                            value={valueFatherName}
+                                            //value={valueFatherName}
                                             onChange={handleChangeFatherName}
                                             style={style}
                                             trigger='blur'
@@ -234,27 +250,47 @@ function App() {
                                             field="mothername"
                                             label="Mother Name"
                                             initValue={valueMotherName}
-                                            value={valueMotherName}
+                                            //value={valueMotherName}
                                             onChange={handleChangeMotherName}
                                             style={style}
                                             trigger='blur'
                                         />
+                                        <Input
+                                            field="officername"
+                                            label="Officer Name"
+                                            initValue={valueOfficerName}
+                                            //value={valueOfficerName}
+                                            onChange={handleChangeOfficerName}
+                                            style={style}
+                                            trigger='blur'
+                                            disabled
+                                        />
+                                        <Input
+                                            field="officernip"
+                                            label="Officer NIP."
+                                            initValue={valueOfficerNIP}
+                                            //value={valueOfficerNIP}
+                                            onChange={handleChangeOfficerNIP}
+                                            style={style}
+                                            trigger='blur'
+                                            disabled
+                                        />
                                         <Button type='primary' theme='solid' onClick={handlePrintBirthCert} style={{marginTop:'24px'}}>Create Birth Certificate</Button>
                                     </div>
-                                    
                                 </Col>
-                                <Col
-                                    xs={24} sm={24} md={24} lg={12} xl={12} xxl={12}
-                                >
-                                    <div style={{color:'var(--semi-color-danger)', marginTop:'32px'}}>
+                                
+                                <Col xs={24} sm={24} md={24} lg={12} xl={12} xxl={12}>
+                                    <div style={{color:'var(--semi-color-danger)'}}>
                                         According to <a href="https://peraturan.bpk.go.id/Details/210274/permendagri-no-73-tahun-2022" target="_blank">
                                             Regulation of the Minister of Home Affairs Number 73 of 2022, Indonesia
                                         </a><br/>
                                         • Name must be at least 2 words and a maximum of 60 characters (including spaces)<br/>
                                         • Using Latin letters according to Indonesian spelling<br/>
                                         • Abbreviations are not allowed (for example: “Abd” for “Abdul” is prohibited)<br/>
-                                        • Does not contain numbers or symbols (e.g., “@” or “#”)<br/>
-                                        • Does not contain academic or religious titles, such as S.Pd, Dr, S.H, etc<br/>
+                                        • Does not contain numbers or symbols (e.g., "1", "2", “@” or “#”)<br/>
+                                        <br/>
+                                        For adults who wish to change their name:<br/>
+                                        • Does not contain academic or religious titles, such as S.Pd, Dr., S.H., H., Hj., Pdt., etc<br/>
                                         <br/>
                                         Since Indonesia's population has reached 284 million in 2025,<br/>
                                         This system might be implemented 'Per Province' to make full-name data processing lighter and faster<br/>
@@ -304,4 +340,4 @@ function App() {
     );
 };
 
-export default App;
+export default Home;
