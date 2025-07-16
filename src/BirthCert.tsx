@@ -21,7 +21,7 @@ function BirthCert() {
                 <div><i>Personal Registration Number</i></div>
                 <br/>
                 <div>
-                    <img src="http://localhost:5173/garuda_logo.png" width="130" alt="Garuda"/>
+                    <img src="http://localhost:5173/garuda_logo.png" width="120" alt="Garuda"/>
                     <div><b>REPUBLIK INDONESIA</b></div><br/>
 
                     <div><b style={{textDecoration:'underline'}}>PENCATATAN SIPIL</b></div>
@@ -53,7 +53,7 @@ function BirthCert() {
                     <p>
                         Pejabat Pencatatan Sipil <br/>
                         <b>KOTA JAKARTA PUSAT</b><br/><br/>
-                        <img src="http://localhost:5173/qrcode.png" alt="QR Code" style={{width:'105px', height:'105px'}}/><br/>
+                        <img src="http://localhost:5173/qrcode.png" alt="QR Code" style={{width:'95px', height:'95px'}}/><br/>
                         <b>Drs. BUDI ABDUL, M.Si</b><br/>
                         NIP. 1962XXXXXXXXXXXXXX
                     </p>
@@ -62,6 +62,8 @@ function BirthCert() {
                 <div>Dokumen ini telah ditandatangani secara elektronik menggunakan sertifikat elektronik<br/>
                     yang diterbitkan oleh Balai Sertifikasi Elektronik (BSrE), BSSN
                 </div>
+                <br/>
+                <div style={{fontSize:'11px'}}>verified by VeriBirthName</div>
             </Layout>
         </>
     );
