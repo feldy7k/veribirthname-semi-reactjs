@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import { useLocation, useNavigate } from "react-router-dom";
 import { Layout, Button } from '@douyinfe/semi-ui';
+import { IconVerify } from '@douyinfe/semi-icons';
 
 function BirthCert() {
 
@@ -17,9 +18,12 @@ function BirthCert() {
         navigate("/home");
     };
 
+    const [fatherName, setFatherName] = useState("ARDI PRASETYA");
+    const [motherName, setMotherName] = useState("AYU KARTIKASARI");
+
     return (
         <>
-            <Button type='primary' onClick={back} style={{width:'100px',marginLeft:'12px', marginBottom:'12px'}}>Back</Button>
+            <Button type='primary' onClick={back} style={{width:'100px',marginLeft:'12px', marginBottom:'12px'}}>Back Home</Button>
             <Button type='primary' theme='solid' onClick={print} style={{width:'100px',marginLeft:'12px', marginBottom:'12px'}}>Print</Button>
             {/* Ukuran A4 pada 100 DPI = 827 x 1169 pixel */}
             <Layout style={{ border: '1px solid var(--semi-color-border)', height:1169, width: 827, padding:'45px 45px', textAlign:'center', fontSize:'13px'}}>
@@ -27,7 +31,7 @@ function BirthCert() {
                 <div><i>Personal Registration Number</i> &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</div>
                 <br/>
                 <div>
-                    <img src="http://localhost:5173/garuda_logo.png" width="120" alt="Garuda"/>
+                    <img src="http://localhost:5173/garuda_logo.png" width="115" alt="Garuda"/>
                     <div style={{fontSize:'16px'}}><b>REPUBLIK INDONESIA</b></div><br/>
 
                     <div><b style={{textDecoration:'underline'}}>PENCATATAN SIPIL</b></div>
@@ -45,13 +49,21 @@ function BirthCert() {
                 <div>bahwa di <b>JAKARTA PUSAT</b> pada tanggal <b>SEMBILAN</b> bulan <b>DESEMBER</b> tahun <b>DUA RIBU SEMBILAN BELAS</b></div>
                 <div><i>at <b>CENTRAL JAKARTA</b> on date <b>THE NINTH</b> of <b>DECEMBER</b> on year <b>TWO THOUSAND AND NINETEEN</b></i></div><br/>
                 <div><b>09 DESEMBER 2019</b></div><br/>
-                <div><span style={{textDecoration:'underline'}}>telah lahir</span> <b>{fullname.toUpperCase()}</b></div>
-                <div><i>the birth of</i> &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</div>
+                <div style={{width:"100%",textAlign:'center'}}>
+                    <table style={{width:'300px', margin:'auto'}}>
+                        <tr>
+                            <td><span style={{textDecoration:'underline'}}>telah lahir</span></td><td style={{width:'220px'}}><b>{fullname.toUpperCase()}</b></td>
+                        </tr>
+                        <tr>
+                            <td><i>the birth of</i></td><td></td>
+                        </tr>
+                    </table>
+                </div>
                 <br/>
-                <div style={{fontSize:'12px',color:'var(--semi-color-primary)'}}>Full Name verified Unique by VeriBirthName ✔</div>
+                <div style={{fontSize:'14px',color:'var(--semi-color-primary)'}}><b>The name has been verified as Unique by VeriBirthName</b> <IconVerify /></div>
                 <br/>
-                <div>anak ke, SATU PEREMPUAN DARI AYAH <b>ARDI PRASETYA</b> DAN IBU <b>AYU KARTIKASARI</b></div>
-                <div><i>child no, FIRST DAUGHTER OF FATHER </i> <b>ARDI PRASETYA</b> <i>AND MOTHER</i> <b>AYU KARTIKASARI</b></div>
+                <div>anak ke, SATU PEREMPUAN DARI AYAH <b>{fatherName}</b> DAN IBU <b>{motherName}</b></div>
+                <div><i>child no, FIRST DAUGHTER OF FATHER </i> <b>{fatherName}</b> <i>AND MOTHER</i> <b>{motherName}</b></div>
                 <br/>
                 <br/>
                 <br/>

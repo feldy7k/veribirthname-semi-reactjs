@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import { useNavigate } from 'react-router-dom';
-import { IconSemiLogo, IconBell, IconHelpCircle, IconBytedanceLogo, IconHome, IconFile, IconLive, IconSetting } from '@douyinfe/semi-icons';
-import { Layout, Nav, Button, Breadcrumb, Skeleton, Avatar, Modal, Form, Col, Row, Space, Image, ImagePreview, Banner } from '@douyinfe/semi-ui';
+import { IconSemiLogo, IconHome, IconMore, IconTickCircle, IconComment, IconClear } from '@douyinfe/semi-icons';
+import { Layout, Nav, Button, Breadcrumb, Avatar, Form, Col, Row, Image, ImagePreview, Banner, Table, Tag, Popconfirm } from '@douyinfe/semi-ui';
 
 function App() {
     const { Header, Footer, Sider, Content } = Layout;
@@ -51,6 +51,14 @@ function App() {
             },
         });
     }
+
+    //popconfirm
+    const onConfirm = () => {
+        navigate("/signIn");
+    };
+    const onCancel = () => {
+        
+    };
     
     return (
         <Layout style={{ border: '1px solid var(--semi-color-border)' }}>
@@ -72,17 +80,26 @@ function App() {
                                     fontWeight: '600',
                                 }}
                             >
-                                VeriBirthName Dashboard
+                                VeriBirthName | Dashboard
                             </span>
                             
                         </span>
                         <Nav.Footer>
-                            <span style={{marginRight:'10px', fontSize:'14px'}}>
-                                Feldy Judah Kambey | Administrator
-                            </span>
-                            <Avatar color="blue" size="small">
-                                FK
-                            </Avatar>
+                            <Popconfirm
+                                title="Confirmation"
+                                content="Do you want to Sign Out?"
+                                onConfirm={onConfirm}
+                                onCancel={onCancel}
+                                okText='Yes'
+                                cancelText='No'
+                            >
+                                <span style={{marginRight:'10px', fontSize:'14px',cursor:'pointer'}}>
+                                    Feldy Judah Kambey | Administrator
+                                </span>
+                                <Avatar color="blue" size="small">
+                                    FK
+                                </Avatar>
+                            </Popconfirm>
                         </Nav.Footer>
                     </Nav>
                 </div>
@@ -131,7 +148,9 @@ function App() {
                             onValueChange={(v)=>console.log(v)}
                         >
                             <Row>
-                                <Col span={12}>
+                                <Col
+                                    xs={24} sm={24} md={24} lg={12} xl={12} xxl={12}
+                                >
                                     Check the eligible Baby Name for birth certificate registration.
                                     <Input
                                         field="fullname"
@@ -173,7 +192,9 @@ function App() {
                                     </div>
                                     
                                 </Col>
-                                <Col span={12}>
+                                <Col
+                                    xs={24} sm={24} md={24} lg={12} xl={12} xxl={12}
+                                >
                                     <div style={{color:'var(--semi-color-danger)', marginTop:'32px'}}>
                                         Since Indonesia's population has reached 284 million, this system might be implemented per province to make full-name data processing lighter and faster<br/>
                                         <br/>
@@ -196,6 +217,7 @@ function App() {
                                         height={269}
                                         src="http://localhost:5173/fullname_example.png"
                                     />
+
                                 </Col>
                             </Row>
                         </Form>

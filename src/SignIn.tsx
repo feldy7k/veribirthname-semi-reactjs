@@ -1,10 +1,12 @@
 import React, {useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 import { IconSemiLogo, IconBell, IconHelpCircle, IconBytedanceLogo, IconHome, IconFile, IconLive, IconSetting } from '@douyinfe/semi-icons';
-import { Layout, Nav, Button, Breadcrumb, Skeleton, Avatar, Modal, Form, Col, Row, Space, Image, ImagePreview, Banner } from '@douyinfe/semi-ui';
+import { Layout, Nav, Button, Breadcrumb, Skeleton, Avatar, Modal, Form, Col, Row, Space, Image, ImagePreview, Banner, Card, Typography } from '@douyinfe/semi-ui';
 
 function SignIn() {
     const { Header, Footer, Sider, Content } = Layout;
+    const { Text } = Typography;
+    const { Meta } = Card;
     
     const initValues = {
         name: 'semi',
@@ -22,25 +24,8 @@ function SignIn() {
             }
         ]
     };
-    const { Section, Input, InputNumber, AutoComplete, Select, TreeSelect, Cascader, DatePicker, TimePicker, TextArea, CheckboxGroup, Checkbox, RadioGroup, Radio, Slider, Rating, Switch, TagInput } = Form;
-    const style = { width: '90%' };
-
-    const [visibleResult, setVisibleResult] = useState(false);
-    const showResult = () => {
-        setVisibleResult(true);
-    };
-    const resetResult = () => {
-        setVisibleResult(false);
-    };
-
-    const [valueFullName, setValueFullName] = useState('Srikandi Ayu');
-    const handleChangeFullName = (value, event) => {
-        setValueFullName(value);
-        
-        if(visibleResult === true){
-            setVisibleResult(false);
-        }
-    };
+    const { Input } = Form;
+    const style = { width: '100%' };
 
     const navigate = useNavigate();
 
@@ -49,38 +34,47 @@ function SignIn() {
     }
     
     return (
-       
-            <Layout style={{ border: '1px solid var(--semi-color-border)', width:412, margin:"12px 0px 0px 6px"}}>
-                {/* content start */}
-                <Form
-                    initValues={initValues}
-                    style={{ padding: 10, width: '100%' }}
-                    onValueChange={(v)=>console.log(v)}
-                >
-                    <Row>
-                        <Input
-                            field="username"
-                            label="Username"
-                            initValue={""}
-                            // value={valueFullName}
-                            // onChange={handleChangeFullName}
-                            style={style}
-                            trigger='blur'
-                        />
-                        <Input
-                            field="password"
-                            label="Password"
-                            initValue={""}
-                            style={style}
-                            trigger='blur'
-                        />
-                        <Button type='primary' theme='solid' onClick={handleSignIn}>Sign In</Button>
-                        
-                    </Row>
-                </Form>
-                {/* content end */}
+        <Layout style={{ width:'100%', margin:"0px"}}>
+            {/* content start */}
+            <Row>
+                <Col xs={24} sm={24} md={12} lg={8} xl={6} xxl={6}>
+                    <Form
+                        initValues={initValues}
+                        style={{ padding: 15, width: '100%' }}
+                        onValueChange={(v)=>console.log(v)}
+                    >
+                            <Card
+                                title={
+                                    <Meta title='VeriBirthName | Administrator Sign In'
+                                        avatar={<IconSemiLogo/>}
+                                    />
+                                }
+                            >
+                                <Input
+                                    field="username"
+                                    label="Username"
+                                    initValue={""}
+                                    // value={valueFullName}
+                                    // onChange={handleChangeFullName}
+                                    style={style}
+                                    trigger='blur'
+                                />
+                                <Input
+                                    field="password"
+                                    label="Password"
+                                    mode="password"
+                                    initValue={""}
+                                    style={style}
+                                    trigger='blur'
+                                />
+                                <Button type='primary' theme='solid' onClick={handleSignIn}>Sign In</Button>
+                            </Card>
+                    </Form>
+                </Col>
+            </Row>
+            {/* content end */}
 
-            </Layout>
+        </Layout>
 
     );
 };
