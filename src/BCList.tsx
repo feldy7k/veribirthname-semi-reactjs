@@ -197,7 +197,8 @@ function BCList() {
                 <div>
                     <Nav mode="horizontal" defaultSelectedKeys={['Home']}>
                         <Nav.Header>
-                            <IconSemiLogo style={{ height: '36px', fontSize: 36 }} />
+                            {/* <IconSemiLogo style={{ height: '36px', fontSize: 36 }} /> */}
+                            <img src="http://localhost:5173/VeriBirthNameLogo.png" alt="verilogo" height="36px"/>
                         </Nav.Header>
                         <span
                             style={{

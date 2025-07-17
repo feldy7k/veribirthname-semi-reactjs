@@ -46,7 +46,7 @@ function SignIn() {
                             <Card
                                 title={
                                     <Meta title='VeriBirthName | Administrator Sign In'
-                                        avatar={<IconSemiLogo/>}
+                                        avatar={<img src="http://localhost:5173/VeriBirthNameLogo.png" alt="verilogo" height="48px"/>}
                                     />
                                 }
                             >
