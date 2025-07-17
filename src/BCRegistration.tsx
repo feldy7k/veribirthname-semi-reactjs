@@ -1,10 +1,23 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
 import { IconSemiLogo, IconHome, IconMore, IconTickCircle, IconComment, IconClear, IconFile, IconArrowRight, IconEdit } from '@douyinfe/semi-icons';
 import { Layout, Nav, Button, Breadcrumb, Avatar, Form, Col, Row, Image, ImagePreview, Banner, Table, Tag, Popconfirm } from '@douyinfe/semi-ui';
 
 function BCRegistration() {
     const { Header, Footer, Sider, Content } = Layout;
+
+    // set full name
+    const [valueFullName, setValueFullName] = useState("");
+
+    useEffect(() => {
+        const storeFullname = localStorage.getItem("veribirthname_babyname") || "";
+        console.log('Stored storeFullname:', storeFullname);
+        setValueFullName(storeFullname);
+    }, []);
+
+    const handleChangeFullName = (value) => {
+        setValueFullName(value);
+    };
     
     const initValues = {
         name: 'semi',
@@ -25,42 +38,6 @@ function BCRegistration() {
     const { Input, Select, DatePicker } = Form;
     const style = { width: '90%' };
 
-    const [visibleResultName, setVisibleResultName] = useState(false);
-
-    const handleSubmitName = () => {
-        setVisibleResultName(true);
-
-        // set var name
-        localStorage.removeItem("veribirthname_babyname");
-        localStorage.removeItem("veribirthname_fathername");
-        localStorage.removeItem("veribirthname_mothername");
-
-        localStorage.setItem("veribirthname_babyname", valueFullName.toUpperCase());
-        localStorage.setItem("veribirthname_fathername", valueFatherName.toUpperCase());
-        localStorage.setItem("veribirthname_mothername", valueMotherName.toUpperCase());
-
-        localStorage.removeItem("veribirthname_officername");
-        localStorage.removeItem("veribirthname_officernip");
-        
-        localStorage.setItem("veribirthname_officername", valueOfficerName.toUpperCase());
-        localStorage.setItem("veribirthname_officernip", valueOfficerNIP.toUpperCase());
-    };
-
-    // set input baby full name
-    const [valueFullName, setValueFullName] = useState('Srikandi Ayu');
-
-    const handleChangeFullName = (value) => {
-        setValueFullName(value);
-        
-        if(visibleResultName === true){
-            setVisibleResultName(false);
-        }
-    };
-
-    const handleReset = () => {
-        setVisibleResultName(false);
-    }
-
     // additional field
     const [valueFatherName, setValueFatherName] = useState('Ardy Prasetya');
     const handleChangeFatherName = (value) => {
@@ -80,11 +57,6 @@ function BCRegistration() {
     };
 
     const navigate = useNavigate();
-
-    const handlePreviewBirthCert = () =>
-    {
-        window.open("http://localhost:5173/BirthCert.html?mode=Preview", "_blank");
-    }
 
     //popconfirm
     const onConfirm = () => {
@@ -186,7 +158,6 @@ function BCRegistration() {
                             initValues={initValues}
                             style={{ padding: 10, width: '100%' }}
                             onValueChange={(v)=>console.log(v)}
-                            onSubmit={handleSubmitName}
                         >
                             <Row>
                                 <Col xs={24} sm={24} md={24} lg={12} xl={12} xxl={12}>
@@ -198,8 +169,10 @@ function BCRegistration() {
                                                 <Input
                                                     field="selectedfullname"
                                                     label="Full Name"
+                                                    key={valueFullName}
                                                     initValue={valueFullName}
-                                                    //value={valueFullName}
+                                                    // value={valueFullName}
+                                                    onChange={handleChangeFullName}
                                                     style={style}
                                                     trigger='blur'
                                                     disabled

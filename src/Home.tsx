@@ -59,6 +59,7 @@ function Home() {
 
     const handleReset = () => {
         setVisibleResultName(false);
+        setValueFullName("");
     }
 
     // additional field
@@ -193,6 +194,7 @@ function Home() {
                                         label="Desired Full Name"
                                         initValue={valueFullName}
                                         onChange={handleChangeFullName}
+                                        key={valueFullName}
                                         style={style}
                                         trigger='blur'
                                         maxLength={60}
