@@ -1,3 +1,5 @@
+// author feldy kambey
+// plan for thesis master degree
 import React, {useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 import { IconSemiLogo, IconHome, IconMore, IconTickCircle, IconComment, IconClear, IconFile, IconArrowRight, IconEdit } from '@douyinfe/semi-icons';
