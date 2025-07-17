@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { IconSemiLogo, IconHome, IconMore, IconTickCircle, IconComment, IconClear, IconFile, IconArrowRight, IconEdit } from '@douyinfe/semi-icons';
 import { Layout, Nav, Button, Breadcrumb, Avatar, Form, Col, Row, Image, ImagePreview, Banner, Table, Tag, Popconfirm } from '@douyinfe/semi-ui';
 
-function Home() {
+function BCRegistration() {
     const { Header, Footer, Sider, Content } = Layout;
     
     const initValues = {
@@ -94,9 +94,12 @@ function Home() {
         
     };
 
-    const handleProceed = () => {
-        navigate("/bcRegistration");
+    const handleNavigateList = () => {
+        navigate("/bcList");
     };
+
+    // CREATE, UPDATE
+    const [valuePageState, setValuePageState] = useState('CREATE');
     
     return (
         <Layout style={{ border: '1px solid var(--semi-color-border)' }}>
@@ -146,7 +149,7 @@ function Home() {
                 <Sider style={{ backgroundColor: 'var(--semi-color-bg-1)' }}>
                     <Nav
                         style={{ maxWidth: 220, height: '100%' }}
-                        defaultSelectedKeys={['Home']}
+                        defaultSelectedKeys={['BCRegistration']}
                         items={[
                             { itemKey: 'Home', text: 'Home', icon: <IconHome size="large" />, onClick: () => navigate('/home')},
                             { itemKey: 'BCRegistration', text: 'BC Registration', icon: <IconEdit size="large" />, onClick: () => navigate('/bcRegistration') },
@@ -167,7 +170,7 @@ function Home() {
                         style={{
                             marginBottom: '24px',
                         }}
-                        routes={['VeriBirthName', 'Home']}
+                        routes={['VeriBirthName', 'BC Registration']}
                     />
                     <div
                         style={{
@@ -187,78 +190,104 @@ function Home() {
                         >
                             <Row>
                                 <Col xs={24} sm={24} md={24} lg={12} xl={12} xxl={12}>
-                                    Check if the Name desired by the parents for their child is Unique for birth certificate registration:
-                                    <Input
-                                        field="fullname"
-                                        label="Desired Full Name"
-                                        initValue={valueFullName}
-                                        onChange={handleChangeFullName}
-                                        style={style}
-                                        trigger='blur'
-                                        maxLength={60}
-                                        rules={[
-                                            { validator: (rule, value) => (value.trim().split(/\s+/).length >= 2), message: 'should contain at least 2 words' },
-                                            { validator: (rule, value) => (/[^a-zA-Z ]/.test(value)===false), message: 'numbers or symbols (e.g., "1", "2", “@” or “#”) are not allowed' }
-                                        ]}
-                                    />
-                                    <Button type='primary' theme='solid' htmlType="submit">Submit</Button>
-                                    <Button type='primary' onClick={handleReset} style={{marginLeft:"12px"}}>Reset</Button>
-
-                                    <div style={{display:(visibleResultName===true ? 'block' : 'none'), padding: 0, marginTop:'20px', border: 'none' }}>
-                                        <div>Result:</div>
+                                    <div style={{padding: 0, border: 'none' }}>
+                                        <div style={{color:'var(--semi-color-primary)'}}>State = {valuePageState}</div><br/>
+                                        <div><b>Additional details needed:</b></div>
+                                        <Row>
+                                            <Col sm={24} md={12}>
+                                                <Input
+                                                    field="selectedfullname"
+                                                    label="Full Name"
+                                                    initValue={valueFullName}
+                                                    //value={valueFullName}
+                                                    style={style}
+                                                    trigger='blur'
+                                                    disabled
+                                                />
+                                                <Select field="gender" style={style} label='Gender（Select）' placeholder='Gender'>
+                                                    <Select.Option value="P">DAUGHTER (FEMALE)</Select.Option>
+                                                    <Select.Option value="L">SON (MALE)</Select.Option>
+                                                </Select>
+                                                <Select field="placeofbirth" style={style} label='Place of Birth（Select）' placeholder='Place of Birth'>
+                                                    <Select.Option value="JKT1">Jakarta Pusat</Select.Option>
+                                                    <Select.Option value="JKT2">Jakarta Utara</Select.Option>
+                                                    <Select.Option value="JKT3">Jakarta Selatan</Select.Option>
+                                                    <Select.Option value="JKT4">Jakarta Barat</Select.Option>
+                                                    <Select.Option value="TGR">Tangerang</Select.Option>
+                                                </Select>
+                                                <DatePicker field="date" label='Date of Birth（DatePicker）' style={style} initValue={new Date()} placeholder='Date of Birth' />
+                                                <Select field="childno" style={style} label='Child No（Select）' placeholder='Child No'>
+                                                    <Select.Option value="1">FIRST</Select.Option>
+                                                    <Select.Option value="2">SECOND</Select.Option>
+                                                    <Select.Option value="3">THIRD</Select.Option>
+                                                    <Select.Option value="4">FOURTH</Select.Option>
+                                                    <Select.Option value="5">FIFTH</Select.Option>
+                                                    <Select.Option value="6">SIXTH</Select.Option>
+                                                    <Select.Option value="7">SEVENTH</Select.Option>
+                                                    <Select.Option value="8">EIGHTH</Select.Option>
+                                                </Select>
+                                            </Col>
+                                            <Col sm={24} md={12}>
+                                                <span style={{color:'var(--semi-color-danger)',fontSize:'12px'}}>Please check and ensure it matches the father's name on the ID card</span>
+                                                <Input
+                                                    field="fathername"
+                                                    label="Father Name"
+                                                    initValue={valueFatherName}
+                                                    //value={valueFatherName}
+                                                    onChange={handleChangeFatherName}
+                                                    style={style}
+                                                    trigger='blur'
+                                                />
+                                                <span style={{color:'var(--semi-color-danger)',fontSize:'12px'}}>Please check and ensure it matches the mother's name on the ID card</span>
+                                                <Input
+                                                    field="mothername"
+                                                    label="Mother Name"
+                                                    initValue={valueMotherName}
+                                                    //value={valueMotherName}
+                                                    onChange={handleChangeMotherName}
+                                                    style={style}
+                                                    trigger='blur'
+                                                />
+                                                <Input
+                                                    field="officername"
+                                                    label="Officer Name"
+                                                    initValue={valueOfficerName}
+                                                    //value={valueOfficerName}
+                                                    onChange={handleChangeOfficerName}
+                                                    style={style}
+                                                    trigger='blur'
+                                                    disabled
+                                                />
+                                                <Input
+                                                    field="officernip"
+                                                    label="Officer NIP."
+                                                    initValue={valueOfficerNIP}
+                                                    //value={valueOfficerNIP}
+                                                    onChange={handleChangeOfficerNIP}
+                                                    style={style}
+                                                    trigger='blur'
+                                                    disabled
+                                                />
+                                            </Col>
+                                        </Row>
+                                        <Button type='primary' theme='solid' style={{marginTop:'24px'}}>Save Data</Button><br/>
                                         <br/>
-                                        <div style={{width:340}}>
-                                            {/* <Banner 
-                                                fullMode={false} type="danger" bordered icon={null} closeIcon={null} 
-                                                title={<div style={{ fontWeight: 600, fontSize: '14px', lineHeight: '20px' }}>❌ Rejected </div>}
-                                                description={
-                                                    <div>
-                                                        This name <b>{valueFullName}</b> has already been used.<br/>
-                                                        Please choose an alternative.
-                                                    </div>
-                                                }
-                                            />
-                                            <br/> */}
-                                            <Banner 
-                                                fullMode={false} type="success" bordered icon={null} closeIcon={null} 
-                                                title={<div style={{ fontWeight: 600, fontSize: '14px', lineHeight: '20px' }}>✅ Accepted </div>}
-                                                description={
-                                                    <div>
-                                                        This name <b>{valueFullName}</b> available to use.
-                                                    </div>
-                                                }
-                                            />
-                                        </div>
-                                        <br/>
-                                        <Button type='primary' theme='solid' style={{marginTop:'6px'}} onClick={handleProceed}>Proceed to Birth Certificate Registration &nbsp; <IconArrowRight/></Button><br/>
-                                        
+                                        <div style={{color:'var(--semi-color-success)'}}>Data was saved successfully.</div>
+                                        <Input
+                                            field="nik"
+                                            label={"NIK Generated for'" + valueFullName + "'"}
+                                            initValue={"3374XXXXXXXXXXXXXXXXX"}
+                                            //value={"3374XXXXXXXXXXXXXXXXX"}
+                                            style={style}
+                                            trigger='blur'
+                                            disabled
+                                        />
+                                        <Button type='primary' theme='solid' style={{marginTop:'12px'}} onClick={handleNavigateList}>Go to BC List</Button>
                                     </div>
                                 </Col>
                                 
                                 <Col xs={24} sm={24} md={24} lg={12} xl={12} xxl={12}>
-                                    <div style={{color:'var(--semi-color-danger)'}}>
-                                        According to <a href="https://peraturan.bpk.go.id/Details/210274/permendagri-no-73-tahun-2022" target="_blank">
-                                            Regulation of the Minister of Home Affairs Number 73 of 2022, Indonesia
-                                        </a><br/>
-                                        • Name must be at least 2 words and a maximum of 60 characters (including spaces)<br/>
-                                        • Using Latin letters according to Indonesian spelling<br/>
-                                        • Abbreviations are not allowed (for example: “Abd” for “Abdul” is prohibited)<br/>
-                                        • Does not contain numbers or symbols (e.g., "1", "2", “@” or “#”)<br/>
-                                        For adults who wish to change their name:<br/>
-                                        • Does not contain academic or religious titles, such as S.Pd, Dr., S.H., H., Hj., Pdt., etc<br/>
-                                        <br/>
-                                        This system consumes data from the Department of Population and Civil Registration<br/>
-                                        <br/>
-                                        Note: Always check the latest regulations, as they may be updated at any time
-                                    </div>
-                                    <div style={{marginTop:'32px'}}>
-                                        For Example:
-                                    </div>
-                                    <Image
-                                        width={756}
-                                        height={269}
-                                        src="http://localhost:5173/fullname_example.png"
-                                    />
+                                   
 
                                 </Col>
                             </Row>
@@ -294,4 +323,4 @@ function Home() {
     );
 };
 
-export default Home;
+export default BCRegistration;

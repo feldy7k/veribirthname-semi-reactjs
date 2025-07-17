@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 import { IconSemiLogo, IconHome, IconMore, IconTickCircle, IconComment, IconClear, IconFile, IconArrowRight, IconEdit } from '@douyinfe/semi-icons';
-import { Layout, Nav, Button, Breadcrumb, Avatar, Form, Col, Row, Image, ImagePreview, Banner, Table, Tag, Popconfirm } from '@douyinfe/semi-ui';
+import { Layout, Nav, Button, Breadcrumb, Avatar, Form, Col, Row, Image, ImagePreview, Banner, Popconfirm, Table, Tag } from '@douyinfe/semi-ui';
 
-function Home() {
+function BCList() {
     const { Header, Footer, Sider, Content } = Layout;
     
     const initValues = {
@@ -94,9 +94,100 @@ function Home() {
         
     };
 
-    const handleProceed = () => {
-        navigate("/bcRegistration");
-    };
+    // CREATE, UPDATE
+    const [valuePageState, setValuePageState] = useState('CREATE');
+
+
+    const columns = [
+        {
+            title: 'NIK',
+            dataIndex: 'nik'
+        },
+        {
+            title: 'Full Name',
+            dataIndex: 'fullname'
+        },
+        {
+            title: 'Gender',
+            dataIndex: 'gender'
+        },
+        {
+            title: 'POB',
+            dataIndex: 'placeofbirth'
+        },
+        {
+            title: 'DOB',
+            dataIndex: 'dateofbirth'
+        },
+        {
+            title: 'Child No',
+            dataIndex: 'childno'
+        },
+        {
+            title: 'Father Name',
+            dataIndex: 'fathername'
+        },
+        {
+            title: 'Mother Name',
+            dataIndex: 'mothername'
+        },
+        {
+            title: 'Create Date',
+            dataIndex: 'createTime',
+        },
+        {
+            title: '',
+            dataIndex: 'operate',
+            render: () => {
+                return <Button type='warning' theme='solid' onClick={handlePreviewBirthCert} >Preview</Button>;
+            },
+        },
+        {
+            title: '',
+            dataIndex: 'operate',
+            render: () => {
+                return <Button type='danger' theme='solid' onClick={handlePreviewBirthCert} >Download (PDF)</Button>;
+            },
+        },
+    ];
+    const data = [
+        {
+            key: '1',
+            name: 'Semi Design 设计稿.fig',
+            nameIconSrc: 'https://lf3-static.bytednsdoc.com/obj/eden-cn/ptlz_zlp/ljhwZthlaukjlkulzlp/figma-icon.png',
+            size: '2M',
+            owner: '姜鹏志',
+            status: 'success',
+            createTime: '2020-02-02 05:13',
+            avatarBg: 'grey',
+            nik:'3571XXXXXXXXXXXXXXXXX',
+            fullname: 'SRIKANDI AYU',
+            placeofbirth: 'JAKARTA PUSAT',
+            dateofbirth: '2019-12-09',
+            gender: 'FEMALE',
+            childno: '1',
+            fathername: 'Ardy Prasetya',
+            mothername: 'Sri Suharti'
+        },
+        {
+            key: '2',
+            name: 'Semi Design 分享演示文稿',
+            nameIconSrc: 'https://lf3-static.bytednsdoc.com/obj/eden-cn/ptlz_zlp/ljhwZthlaukjlkulzlp/docs-icon.png',
+            size: '2M',
+            owner: '郝宣',
+            status: 'pending',
+            createTime: '2020-01-17 05:31',
+            avatarBg: 'red',
+            nik:'3374XXXXXXXXXXXXXXXXX',
+            fullname: 'SRI KANDI AYU',
+            placeofbirth: 'JAKARTA PUSAT',
+            dateofbirth: '2020-02-12',
+            gender: 'FEMALE',
+            childno: '1',
+            fathername: 'Ardy Prasetya',
+            mothername: 'Sri Suharti'
+        }
+    ];
     
     return (
         <Layout style={{ border: '1px solid var(--semi-color-border)' }}>
@@ -146,7 +237,7 @@ function Home() {
                 <Sider style={{ backgroundColor: 'var(--semi-color-bg-1)' }}>
                     <Nav
                         style={{ maxWidth: 220, height: '100%' }}
-                        defaultSelectedKeys={['Home']}
+                        defaultSelectedKeys={['BCList']}
                         items={[
                             { itemKey: 'Home', text: 'Home', icon: <IconHome size="large" />, onClick: () => navigate('/home')},
                             { itemKey: 'BCRegistration', text: 'BC Registration', icon: <IconEdit size="large" />, onClick: () => navigate('/bcRegistration') },
@@ -167,7 +258,7 @@ function Home() {
                         style={{
                             marginBottom: '24px',
                         }}
-                        routes={['VeriBirthName', 'Home']}
+                        routes={['VeriBirthName', 'BC List']}
                     />
                     <div
                         style={{
@@ -179,90 +270,8 @@ function Home() {
                     >
                         
                         {/* content start */}
-                        <Form
-                            initValues={initValues}
-                            style={{ padding: 10, width: '100%' }}
-                            onValueChange={(v)=>console.log(v)}
-                            onSubmit={handleSubmitName}
-                        >
-                            <Row>
-                                <Col xs={24} sm={24} md={24} lg={12} xl={12} xxl={12}>
-                                    Check if the Name desired by the parents for their child is Unique for birth certificate registration:
-                                    <Input
-                                        field="fullname"
-                                        label="Desired Full Name"
-                                        initValue={valueFullName}
-                                        onChange={handleChangeFullName}
-                                        style={style}
-                                        trigger='blur'
-                                        maxLength={60}
-                                        rules={[
-                                            { validator: (rule, value) => (value.trim().split(/\s+/).length >= 2), message: 'should contain at least 2 words' },
-                                            { validator: (rule, value) => (/[^a-zA-Z ]/.test(value)===false), message: 'numbers or symbols (e.g., "1", "2", “@” or “#”) are not allowed' }
-                                        ]}
-                                    />
-                                    <Button type='primary' theme='solid' htmlType="submit">Submit</Button>
-                                    <Button type='primary' onClick={handleReset} style={{marginLeft:"12px"}}>Reset</Button>
-
-                                    <div style={{display:(visibleResultName===true ? 'block' : 'none'), padding: 0, marginTop:'20px', border: 'none' }}>
-                                        <div>Result:</div>
-                                        <br/>
-                                        <div style={{width:340}}>
-                                            {/* <Banner 
-                                                fullMode={false} type="danger" bordered icon={null} closeIcon={null} 
-                                                title={<div style={{ fontWeight: 600, fontSize: '14px', lineHeight: '20px' }}>❌ Rejected </div>}
-                                                description={
-                                                    <div>
-                                                        This name <b>{valueFullName}</b> has already been used.<br/>
-                                                        Please choose an alternative.
-                                                    </div>
-                                                }
-                                            />
-                                            <br/> */}
-                                            <Banner 
-                                                fullMode={false} type="success" bordered icon={null} closeIcon={null} 
-                                                title={<div style={{ fontWeight: 600, fontSize: '14px', lineHeight: '20px' }}>✅ Accepted </div>}
-                                                description={
-                                                    <div>
-                                                        This name <b>{valueFullName}</b> available to use.
-                                                    </div>
-                                                }
-                                            />
-                                        </div>
-                                        <br/>
-                                        <Button type='primary' theme='solid' style={{marginTop:'6px'}} onClick={handleProceed}>Proceed to Birth Certificate Registration &nbsp; <IconArrowRight/></Button><br/>
-                                        
-                                    </div>
-                                </Col>
-                                
-                                <Col xs={24} sm={24} md={24} lg={12} xl={12} xxl={12}>
-                                    <div style={{color:'var(--semi-color-danger)'}}>
-                                        According to <a href="https://peraturan.bpk.go.id/Details/210274/permendagri-no-73-tahun-2022" target="_blank">
-                                            Regulation of the Minister of Home Affairs Number 73 of 2022, Indonesia
-                                        </a><br/>
-                                        • Name must be at least 2 words and a maximum of 60 characters (including spaces)<br/>
-                                        • Using Latin letters according to Indonesian spelling<br/>
-                                        • Abbreviations are not allowed (for example: “Abd” for “Abdul” is prohibited)<br/>
-                                        • Does not contain numbers or symbols (e.g., "1", "2", “@” or “#”)<br/>
-                                        For adults who wish to change their name:<br/>
-                                        • Does not contain academic or religious titles, such as S.Pd, Dr., S.H., H., Hj., Pdt., etc<br/>
-                                        <br/>
-                                        This system consumes data from the Department of Population and Civil Registration<br/>
-                                        <br/>
-                                        Note: Always check the latest regulations, as they may be updated at any time
-                                    </div>
-                                    <div style={{marginTop:'32px'}}>
-                                        For Example:
-                                    </div>
-                                    <Image
-                                        width={756}
-                                        height={269}
-                                        src="http://localhost:5173/fullname_example.png"
-                                    />
-
-                                </Col>
-                            </Row>
-                        </Form>
+                        <div><b>Birth Certificate List</b></div><br/>
+                        <Table columns={columns} dataSource={data} pagination={false} />
                         {/* content end */}
 
                     </div>
@@ -294,4 +303,4 @@ function Home() {
     );
 };
 
-export default Home;
+export default BCList;
