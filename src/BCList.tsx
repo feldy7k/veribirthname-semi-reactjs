@@ -85,7 +85,7 @@ function BCList() {
 
     const handlePreviewBirthCert = () =>
     {
-        window.open("http://localhost:5173/BirthCert.html?mode=Preview", "_blank");
+        window.open("http://localhost:5173/BirthCert.html", "_blank");
     }
 
     //popconfirm
@@ -141,16 +141,9 @@ function BCList() {
             title: '',
             dataIndex: 'operate',
             render: () => {
-                return <Button type='warning' theme='solid' onClick={handlePreviewBirthCert} >Preview</Button>;
+                return <Button type='primary' theme='outline' onClick={handlePreviewBirthCert} >Print Certificate</Button>;
             },
-        },
-        {
-            title: '',
-            dataIndex: 'operate',
-            render: () => {
-                return <Button type='danger' theme='solid' onClick={handlePreviewBirthCert} >Download (PDF)</Button>;
-            },
-        },
+        }
     ];
     const data = [
         {

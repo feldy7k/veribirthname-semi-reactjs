@@ -185,13 +185,13 @@ function Home() {
                         {/* content start */}
                         <Form
                             initValues={initValues}
-                            style={{ padding: 10, width: '100%' }}
+                            style={{ padding: 10, width: '100%', margin:"0px" }}
                             onValueChange={(v)=>console.log(v)}
                             onSubmit={handleSubmitName}
                         >
                             <Row>
                                 <Col xs={24} sm={24} md={24} lg={12} xl={12} xxl={12}>
-                                    Check if the Name desired by the parents for their child is Unique for birth certificate registration:
+                                    <div><b>Verify Here</b></div><br/>
                                     <Input
                                         field="fullname"
                                         label="Desired Full Name"
@@ -207,7 +207,7 @@ function Home() {
                                         ]}
                                     />
                                     <Button type='primary' theme='solid' htmlType="submit">Submit</Button>
-                                    <Button type='primary' onClick={handleReset} style={{marginLeft:"12px"}}>Reset</Button>
+                                    <Button type='primary' theme='outline' onClick={handleReset} style={{marginLeft:"14px"}}>Reset</Button>
 
                                     <div style={{display:(visibleResultName===true ? 'block' : 'none'), padding: 0, marginTop:'20px', border: 'none' }}>
                                         <div>Result:</div>
@@ -241,6 +241,7 @@ function Home() {
                                 </Col>
                                 
                                 <Col xs={24} sm={24} md={24} lg={12} xl={12} xxl={12}>
+                                    <div><b>Regulations on Personal Names</b></div><br/>
                                     <div style={{color:'var(--semi-color-danger)'}}>
                                         According to <a href="https://peraturan.bpk.go.id/Details/210274/permendagri-no-73-tahun-2022" target="_blank">
                                             Regulation of the Minister of Home Affairs Number 73 of 2022, Indonesia
@@ -252,10 +253,7 @@ function Home() {
                                         For adults who wish to change their name:<br/>
                                         • Does not contain academic or religious titles, such as S.Pd, Dr., S.H., H., Hj., Pdt., etc<br/>
                                         <br/>
-                                        If implemented in real life, this system will consume data from the Department of Population and Civil Registration<br/>
-                                        <br/>
-                                        Note: Always check the latest regulations, as they may be updated at any time
-                                        <br/>
+                                        If implemented in real life, this system would utilize data from the Department of Population and Civil Registration to verify new names<br/>
                                     </div>
                                     <br/>
                                     <div>For Example:</div>
