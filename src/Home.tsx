@@ -24,7 +24,7 @@ function Home() {
             }
         ]
     };
-    const { Input, Select, DatePicker } = Form;
+    const { Input } = Form;
     const style = { width: '90%' };
 
     const [visibleResultName, setVisibleResultName] = useState(false);
@@ -212,7 +212,7 @@ function Home() {
                                         <div>Result:</div>
                                         <br/>
                                         <div style={{width:340}}>
-                                            {/* <Banner 
+                                            <Banner 
                                                 fullMode={false} type="danger" bordered icon={null} closeIcon={null} 
                                                 title={<div style={{ fontWeight: 600, fontSize: '14px', lineHeight: '20px' }}>❌ Rejected </div>}
                                                 description={
@@ -222,7 +222,7 @@ function Home() {
                                                     </div>
                                                 }
                                             />
-                                            <br/> */}
+                                            <br/>
                                             <Banner 
                                                 fullMode={false} type="success" bordered icon={null} closeIcon={null} 
                                                 title={<div style={{ fontWeight: 600, fontSize: '14px', lineHeight: '20px' }}>✅ Accepted </div>}
@@ -251,19 +251,22 @@ function Home() {
                                         For adults who wish to change their name:<br/>
                                         • Does not contain academic or religious titles, such as S.Pd, Dr., S.H., H., Hj., Pdt., etc<br/>
                                         <br/>
-                                        This system consumes data from the Department of Population and Civil Registration<br/>
+                                        If implemented in real life, this system will consume data from the Department of Population and Civil Registration<br/>
                                         <br/>
                                         Note: Always check the latest regulations, as they may be updated at any time
+                                        <br/>
                                     </div>
-                                    <div style={{marginTop:'32px'}}>
-                                        For Example:
-                                    </div>
+                                    <br/>
+                                    <div>For Example:</div>
                                     <Image
                                         width={756}
                                         height={269}
                                         src="http://localhost:5173/fullname_example.png"
                                     />
-
+                                    <br/><br/>
+                                    <div>Indonesian name references:</div>
+                                    • <a href="https://en.wikipedia.org/wiki/Indonesian_names" target="_blank">Wiki Indonesian Names</a><br/>
+                                    • <a href="https://en.wiktionary.org/wiki/Appendix:Indonesian_given_names" target="_blank">Wiktionary Indonesian Given Names</a>
                                 </Col>
                             </Row>
                         </Form>

@@ -156,6 +156,8 @@ function BCRegistration() {
                     >
                         
                         {/* content start */}
+                        <div><b>Birth Certificate Registration</b></div><br/>
+                        <div style={{color:'var(--semi-color-primary)'}}>State = {valuePageState}</div>
                         <Form
                             initValues={initValues}
                             style={{ padding: 10, width: '100%' }}
@@ -164,8 +166,6 @@ function BCRegistration() {
                             <Row>
                                 <Col xs={24} sm={24} md={24} lg={12} xl={12} xxl={12}>
                                     <div style={{padding: 0, border: 'none' }}>
-                                        <div style={{color:'var(--semi-color-primary)'}}>State = {valuePageState}</div><br/>
-                                        <div><b>Additional details needed:</b></div>
                                         <Row>
                                             <Col sm={24} md={12}>
                                                 <Input
