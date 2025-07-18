@@ -1,12 +1,21 @@
 // author feldy kambey
 // plan for thesis master degree
-import React, {useState} from 'react';
+import React, {useState,useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
 import { IconSemiLogo, IconHome, IconMore, IconTickCircle, IconComment, IconClear, IconFile, IconArrowRight, IconEdit } from '@douyinfe/semi-icons';
 import { Layout, Nav, Button, Breadcrumb, Avatar, Form, Col, Row, Image, ImagePreview, Banner, Popconfirm, Table, Tag } from '@douyinfe/semi-ui';
 
 function BCList() {
     const { Header, Footer, Sider, Content } = Layout;
+
+    useEffect(() => {
+        const isLogin = localStorage.getItem("veribirthname_islogin") || "";
+        if(isLogin==="TRUE"){
+
+        }else{
+            navigate("/signIn");
+        }
+    }, []);
     
     const initValues = {
         name: 'semi',
@@ -90,6 +99,7 @@ function BCList() {
 
     //popconfirm
     const onConfirm = () => {
+        localStorage.removeItem("veribirthname_islogin");
         navigate("/signIn");
     };
     const onCancel = () => {

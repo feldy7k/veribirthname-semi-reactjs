@@ -12,6 +12,14 @@ function BCRegistration() {
     const [valueFullName, setValueFullName] = useState("");
 
     useEffect(() => {
+
+        const isLogin = localStorage.getItem("veribirthname_islogin") || "";
+        if(isLogin==="TRUE"){
+
+        }else{
+            navigate("/signIn");
+        }
+        
         const storeFullname = localStorage.getItem("veribirthname_babyname") || "";
         console.log('Stored storeFullname:', storeFullname);
         setValueFullName(storeFullname);
@@ -62,6 +70,7 @@ function BCRegistration() {
 
     //popconfirm
     const onConfirm = () => {
+        localStorage.removeItem("veribirthname_islogin");
         navigate("/signIn");
     };
     const onCancel = () => {

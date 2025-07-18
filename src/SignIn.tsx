@@ -29,10 +29,30 @@ function SignIn() {
 
     const navigate = useNavigate();
 
-    const handleSignIn = () => {
-        navigate("/home");
+    const [valueUsername, setValueUsername] = useState("");
+    const handleChangeUsername = (value) => {
+        setValueUsername(value);
     }
-    
+    const [valuePassword, setValuePassword] = useState("");
+    const handleChangePassword = (value) => {
+        setValuePassword(value);
+    }
+
+    const [valueMessage, setValueMessage] = useState("");
+
+    const handleSignIn = () => {
+
+        if(valueUsername === "feldy" && valuePassword === "1234")
+        {
+            setValueMessage("");
+            localStorage.removeItem("veribirthname_islogin");
+            localStorage.setItem("veribirthname_islogin", "TRUE");
+            navigate("/home");
+        }else{
+            setValueMessage("Username or Password wrong!");
+        }
+    }
+
     return (
         <Layout style={{ width:'100%', margin:"0px"}}>
             {/* content start */}
@@ -53,9 +73,8 @@ function SignIn() {
                                 <Input
                                     field="username"
                                     label="Username"
-                                    initValue={""}
-                                    // value={valueFullName}
-                                    // onChange={handleChangeFullName}
+                                    initValue={valueUsername}
+                                    onChange={handleChangeUsername}
                                     style={style}
                                     trigger='blur'
                                 />
@@ -63,10 +82,12 @@ function SignIn() {
                                     field="password"
                                     label="Password"
                                     mode="password"
-                                    initValue={""}
+                                    initValue={valuePassword}
+                                    onChange={handleChangePassword}
                                     style={style}
                                     trigger='blur'
                                 />
+                                <div style={{color:"var(--semi-color-danger)"}}>{valueMessage}</div>
                                 <Button type='primary' theme='solid' onClick={handleSignIn}>Sign In</Button>
                             </Card>
                     </Form>
