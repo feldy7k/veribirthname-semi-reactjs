@@ -1,0 +1,8 @@
+
+button.btnPrintCertificate{
+    background-color: rgba(var(--semi-purple-5)) !important;
+}
+
+button.btnPrintCertificate:hover {
+    background-color: rgba(var(--semi-purple-7)) !important;
+}

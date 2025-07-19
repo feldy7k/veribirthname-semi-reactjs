@@ -112,6 +112,10 @@ function BCList() {
 
     const columns = [
         {
+            title: 'No',
+            dataIndex: 'key'
+        },
+        {
             title: 'NIK',
             dataIndex: 'nik'
         },
@@ -151,7 +155,7 @@ function BCList() {
             title: '',
             dataIndex: 'operate',
             render: () => {
-                return <Button type='primary' theme='solid' onClick={handlePreviewBirthCert} >Print Certificate</Button>;
+                return <Button type='primary' className='btnPrintCertificate' theme='solid' onClick={handlePreviewBirthCert} >Print Certificate</Button>;
             },
         }
     ];

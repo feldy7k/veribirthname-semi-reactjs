@@ -223,7 +223,7 @@ function Home() {
                                     <div style={{display:(visibleResultName===true ? 'block' : 'none'), padding: 0, marginTop:'20px', border: 'none' }}>
                                         <div>Result:</div>
                                         <br/>
-                                        <div style={{width:450}}>
+                                        <div style={{width:470}}>
                                             <Banner 
                                                 fullMode={false} type="danger" bordered icon={null} closeIcon={null} 
                                                 title={<div style={{ fontWeight: 600, fontSize: '14px', lineHeight: '20px' }}>❌ Rejected </div>}
