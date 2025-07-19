@@ -94,7 +94,7 @@ function BCList() {
 
     const handlePreviewBirthCert = () =>
     {
-        window.open("http://localhost:5173/BirthCert.html", "_blank");
+        window.open("http://localhost:5173/BirthCertificate.html", "_blank");
     }
 
     //popconfirm
@@ -151,20 +151,14 @@ function BCList() {
             title: '',
             dataIndex: 'operate',
             render: () => {
-                return <Button type='primary' theme='outline' onClick={handlePreviewBirthCert} >Print Certificate</Button>;
+                return <Button type='primary' theme='solid' onClick={handlePreviewBirthCert} >Print Certificate</Button>;
             },
         }
     ];
     const data = [
         {
             key: '1',
-            name: 'Semi Design 设计稿.fig',
-            nameIconSrc: 'https://lf3-static.bytednsdoc.com/obj/eden-cn/ptlz_zlp/ljhwZthlaukjlkulzlp/figma-icon.png',
-            size: '2M',
-            owner: '姜鹏志',
-            status: 'success',
-            createTime: '2020-02-02 05:13',
-            avatarBg: 'grey',
+            createTime: '2020-02-18 05:31',
             nik:'3571XXXXXXXXXXXXXXXXX',
             fullname: 'SRIKANDI AYU',
             placeofbirth: 'JAKARTA PUSAT',
@@ -176,21 +170,27 @@ function BCList() {
         },
         {
             key: '2',
-            name: 'Semi Design 分享演示文稿',
-            nameIconSrc: 'https://lf3-static.bytednsdoc.com/obj/eden-cn/ptlz_zlp/ljhwZthlaukjlkulzlp/docs-icon.png',
-            size: '2M',
-            owner: '郝宣',
-            status: 'pending',
             createTime: '2020-01-17 05:31',
-            avatarBg: 'red',
             nik:'3374XXXXXXXXXXXXXXXXX',
             fullname: 'SRI KANDI AYU',
-            placeofbirth: 'JAKARTA PUSAT',
+            placeofbirth: 'JAKARTA SELATAN',
             dateofbirth: '2020-02-12',
             gender: 'FEMALE',
             childno: '1',
-            fathername: 'Ardy Prasetya',
-            mothername: 'Sri Suharti'
+            fathername: 'Budi Santoso',
+            mothername: 'Sumanti'
+        },
+        {
+            key: '3',
+            createTime: '2020-01-17 05:31',
+            nik:'3374XXXXXXXXXXXXXXXXX',
+            fullname: 'SRIKANDY AYU',
+            placeofbirth: 'DEPOK',
+            dateofbirth: '2020-02-12',
+            gender: 'FEMALE',
+            childno: '1',
+            fathername: 'Wahyu Saputro',
+            mothername: 'Yeni'
         }
     ];
     

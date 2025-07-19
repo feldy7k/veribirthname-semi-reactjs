@@ -42,7 +42,7 @@ function SignIn() {
 
     const handleSignIn = () => {
 
-        if(valueUsername === "feldy" && valuePassword === "1234")
+        if(valueUsername === "feldy" && valuePassword === "1")
         {
             setValueMessage("");
             localStorage.removeItem("veribirthname_islogin");
