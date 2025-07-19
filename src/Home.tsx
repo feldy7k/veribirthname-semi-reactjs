@@ -269,7 +269,7 @@ function Home() {
                                     <br/>
                                     <div>For Example:</div>
                                     <Image
-                                        width={800}
+                                        width={790}
                                         src="http://localhost:5173/fullname_example.png"
                                     />
                                     <br/><br/>
