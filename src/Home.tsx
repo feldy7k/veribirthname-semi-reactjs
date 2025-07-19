@@ -58,7 +58,7 @@ function Home() {
     };
 
     // set input baby full name
-    const [valueFullName, setValueFullName] = useState('Srikandi Ayu');
+    const [valueFullName, setValueFullName] = useState('Alverionne Winartha');
 
     const handleChangeFullName = (value) => {
         setValueFullName(value);
@@ -74,7 +74,7 @@ function Home() {
     }
 
     // additional field
-    const [valueFatherName, setValueFatherName] = useState('Ardy Prasetya');
+    const [valueFatherName, setValueFatherName] = useState('Ardy Winartha');
     const handleChangeFatherName = (value) => {
         setValueFatherName(value);
     };
@@ -269,8 +269,7 @@ function Home() {
                                     <br/>
                                     <div>For Example:</div>
                                     <Image
-                                        width={756}
-                                        height={269}
+                                        width={800}
                                         src="http://localhost:5173/fullname_example.png"
                                     />
                                     <br/><br/>

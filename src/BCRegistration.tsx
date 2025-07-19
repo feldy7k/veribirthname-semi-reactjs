@@ -49,7 +49,7 @@ function BCRegistration() {
     const style = { width: '90%' };
 
     // additional field
-    const [valueFatherName, setValueFatherName] = useState('Ardy Prasetya');
+    const [valueFatherName, setValueFatherName] = useState('Ardy Winartha');
     const handleChangeFatherName = (value) => {
         setValueFatherName(value);
     };
@@ -261,7 +261,7 @@ function BCRegistration() {
                                         <div style={{color:'var(--semi-color-success)'}}>Data was saved successfully.</div>
                                         <Input
                                             field="nik"
-                                            label={"NIK Generated for'" + valueFullName + "'"}
+                                            label={"NIK Generated for '" + valueFullName + "'"}
                                             initValue={"3374XXXXXXXXXXXXXXXXX"}
                                             //value={"3374XXXXXXXXXXXXXXXXX"}
                                             style={style}

@@ -6,3 +6,7 @@ button.btnPrintCertificate{
 button.btnPrintCertificate:hover {
     background-color: rgba(var(--semi-purple-7)) !important;
 }
+
+.semi-avatar-blue {
+    background-color: var(--semi-color-primary) !important;
+}
