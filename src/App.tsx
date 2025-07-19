@@ -5,6 +5,7 @@ import Home from './Home';
 import SignIn from './SignIn';
 import BCRegistration from './BCRegistration';
 import BCList from './BCList';
+import ProhibitedNames from './ProhibitedNames';
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <Routes>
         <Route path="/signin" element={<SignIn />} />
         <Route path="/home" element={<Home />} />
+        <Route path="/prohibitedNames" element={<ProhibitedNames />} />
         <Route path="/bcRegistration" element={<BCRegistration />} />
         <Route path="/bcList" element={<BCList />} />
       </Routes>

@@ -2,7 +2,7 @@
 // plan for thesis master degree
 import React, {useState, useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
-import { IconSemiLogo, IconHome, IconMore, IconTickCircle, IconComment, IconClear, IconFile, IconArrowRight, IconEdit } from '@douyinfe/semi-icons';
+import { IconSemiLogo, IconHome, IconMore, IconTickCircle, IconComment, IconClear, IconFile, IconArrowRight, IconEdit, IconVerify } from '@douyinfe/semi-icons';
 import { Layout, Nav, Button, Breadcrumb, Avatar, Form, Col, Row, Image, ImagePreview, Banner, Table, Tag, Popconfirm } from '@douyinfe/semi-ui';
 
 function Home() {
@@ -163,6 +163,7 @@ function Home() {
                         defaultSelectedKeys={['Home']}
                         items={[
                             { itemKey: 'Home', text: 'Home', icon: <IconHome size="large" />, onClick: () => navigate('/home')},
+                            { itemKey: 'ProhibitedNames', text: 'Prohibited Names', icon: <IconClear size="large" />, onClick: () => navigate('/prohibitedNames') },
                             { itemKey: 'BCRegistration', text: 'BC Registration', icon: <IconEdit size="large" />, onClick: () => navigate('/bcRegistration') },
                             { itemKey: 'BCList', text: 'BC List', icon: <IconFile size="large" />, onClick: () => navigate('/bcList') },
                         ]}
@@ -222,13 +223,13 @@ function Home() {
                                     <div style={{display:(visibleResultName===true ? 'block' : 'none'), padding: 0, marginTop:'20px', border: 'none' }}>
                                         <div>Result:</div>
                                         <br/>
-                                        <div style={{width:340}}>
+                                        <div style={{width:450}}>
                                             <Banner 
                                                 fullMode={false} type="danger" bordered icon={null} closeIcon={null} 
                                                 title={<div style={{ fontWeight: 600, fontSize: '14px', lineHeight: '20px' }}>❌ Rejected </div>}
                                                 description={
                                                     <div>
-                                                        This name <b>{valueFullName}</b> has already been used.<br/>
+                                                        The name <b>{valueFullName}</b> has already been used by 32 other citizens.<br/>
                                                         Please choose an alternative.
                                                     </div>
                                                 }
@@ -239,7 +240,7 @@ function Home() {
                                                 title={<div style={{ fontWeight: 600, fontSize: '14px', lineHeight: '20px' }}>✅ Accepted </div>}
                                                 description={
                                                     <div>
-                                                        This name <b>{valueFullName}</b> available to use.
+                                                        The name <b>{valueFullName}</b> available to use.
                                                     </div>
                                                 }
                                             />

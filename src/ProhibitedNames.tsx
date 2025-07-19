@@ -1,12 +1,14 @@
 // author feldy kambey
 // plan for thesis master degree
-import React, {useState,useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
 import { IconSemiLogo, IconHome, IconMore, IconTickCircle, IconComment, IconClear, IconFile, IconArrowRight, IconEdit } from '@douyinfe/semi-icons';
-import { Layout, Nav, Button, Breadcrumb, Avatar, Form, Col, Row, Image, ImagePreview, Banner, Popconfirm, Table, Tag } from '@douyinfe/semi-ui';
+import { Layout, Nav, Button, Breadcrumb, Avatar, Form, Col, Row, Image, ImagePreview, Banner, Table, Tag, Popconfirm } from '@douyinfe/semi-ui';
 
-function BCList() {
+function ProhibitedNames() {
     const { Header, Footer, Sider, Content } = Layout;
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         const isLogin = localStorage.getItem("veribirthname_islogin") || "";
@@ -17,86 +19,6 @@ function BCList() {
         }
     }, []);
     
-    const initValues = {
-        name: 'semi',
-        business: ['ulikeCam'],
-        role: 'ued',
-        switch: true,
-        files: [
-            {
-                uid: '1',
-                name: 'vigo.png',
-                status: 'success',
-                size: '130KB',
-                preview: true,
-                url: 'https://lf3-static.bytednsdoc.com/obj/eden-cn/ptlz_zlp/ljhwZthlaukjlkulzlp/root-web-sites/vigo.png'
-            }
-        ]
-    };
-    const { Input, Select, DatePicker } = Form;
-    const style = { width: '90%' };
-
-    const [visibleResultName, setVisibleResultName] = useState(false);
-
-    const handleSubmitName = () => {
-        setVisibleResultName(true);
-
-        // set var name
-        localStorage.removeItem("veribirthname_babyname");
-        localStorage.removeItem("veribirthname_fathername");
-        localStorage.removeItem("veribirthname_mothername");
-
-        localStorage.setItem("veribirthname_babyname", valueFullName.toUpperCase());
-        localStorage.setItem("veribirthname_fathername", valueFatherName.toUpperCase());
-        localStorage.setItem("veribirthname_mothername", valueMotherName.toUpperCase());
-
-        localStorage.removeItem("veribirthname_officername");
-        localStorage.removeItem("veribirthname_officernip");
-        
-        localStorage.setItem("veribirthname_officername", valueOfficerName.toUpperCase());
-        localStorage.setItem("veribirthname_officernip", valueOfficerNIP.toUpperCase());
-    };
-
-    // set input baby full name
-    const [valueFullName, setValueFullName] = useState('Srikandi Ayu');
-
-    const handleChangeFullName = (value) => {
-        setValueFullName(value);
-        
-        if(visibleResultName === true){
-            setVisibleResultName(false);
-        }
-    };
-
-    const handleReset = () => {
-        setVisibleResultName(false);
-    }
-
-    // additional field
-    const [valueFatherName, setValueFatherName] = useState('Ardy Prasetya');
-    const handleChangeFatherName = (value) => {
-        setValueFatherName(value);
-    };
-    const [valueMotherName, setValueMotherName] = useState('Sri Suharti');
-    const handleChangeMotherName = (value) => {
-        setValueMotherName(value);
-    };
-    const [valueOfficerName, setValueOfficerName] = useState('Feldy Judah Kambey');
-    const handleChangeOfficerName = (value) => {
-        setValueOfficerName(value);
-    };
-    const [valueOfficerNIP, setValueOfficerNIP] = useState('987XXXXXXXXXXXXXXXXX');
-    const handleChangeOfficerNIP = (value) => {
-        setValueOfficerNIP(value);
-    };
-
-    const navigate = useNavigate();
-
-    const handlePreviewBirthCert = () =>
-    {
-        window.open("http://localhost:5173/BirthCert.html", "_blank");
-    }
-
     //popconfirm
     const onConfirm = () => {
         localStorage.removeItem("veribirthname_islogin");
@@ -106,92 +28,87 @@ function BCList() {
         
     };
 
-    // CREATE, UPDATE
-    const [valuePageState, setValuePageState] = useState('CREATE');
-
-
     const columns = [
         {
-            title: 'NIK',
-            dataIndex: 'nik'
+            title: 'No',
+            dataIndex: 'key'
         },
         {
-            title: 'Full Name',
-            dataIndex: 'fullname'
+            title: 'Name',
+            dataIndex: 'name'
         },
         {
-            title: 'Gender',
-            dataIndex: 'gender'
-        },
-        {
-            title: 'POB',
-            dataIndex: 'placeofbirth'
-        },
-        {
-            title: 'DOB',
-            dataIndex: 'dateofbirth'
-        },
-        {
-            title: 'Child No',
-            dataIndex: 'childno'
-        },
-        {
-            title: 'Father Name',
-            dataIndex: 'fathername'
-        },
-        {
-            title: 'Mother Name',
-            dataIndex: 'mothername'
-        },
-        {
-            title: 'Create Date',
-            dataIndex: 'createTime',
-        },
-        {
-            title: '',
-            dataIndex: 'operate',
-            render: () => {
-                return <Button type='primary' theme='outline' onClick={handlePreviewBirthCert} >Print Certificate</Button>;
-            },
+            title: 'Reason',
+            dataIndex: 'reason'
         }
     ];
     const data = [
         {
             key: '1',
-            name: 'Semi Design 设计稿.fig',
-            nameIconSrc: 'https://lf3-static.bytednsdoc.com/obj/eden-cn/ptlz_zlp/ljhwZthlaukjlkulzlp/figma-icon.png',
-            size: '2M',
-            owner: '姜鹏志',
-            status: 'success',
-            createTime: '2020-02-02 05:13',
-            avatarBg: 'grey',
-            nik:'3571XXXXXXXXXXXXXXXXX',
-            fullname: 'SRIKANDI AYU',
-            placeofbirth: 'JAKARTA PUSAT',
-            dateofbirth: '2019-12-09',
-            gender: 'FEMALE',
-            childno: '1',
-            fathername: 'Ardy Prasetya',
-            mothername: 'Sri Suharti'
+            name: 'garuda',
+            reason: 'Uncommon and difficult-to-pronounce name'
         },
         {
             key: '2',
-            name: 'Semi Design 分享演示文稿',
-            nameIconSrc: 'https://lf3-static.bytednsdoc.com/obj/eden-cn/ptlz_zlp/ljhwZthlaukjlkulzlp/docs-icon.png',
-            size: '2M',
-            owner: '郝宣',
-            status: 'pending',
-            createTime: '2020-01-17 05:31',
-            avatarBg: 'red',
-            nik:'3374XXXXXXXXXXXXXXXXX',
-            fullname: 'SRI KANDI AYU',
-            placeofbirth: 'JAKARTA PUSAT',
-            dateofbirth: '2020-02-12',
-            gender: 'FEMALE',
-            childno: '1',
-            fathername: 'Ardy Prasetya',
-            mothername: 'Sri Suharti'
+            name: 'jawa',
+            reason: 'Uncommon and difficult-to-pronounce name'
+        },
+        {
+            key: '3',
+            name: 'nusantara',
+            reason: 'Uncommon and difficult-to-pronounce name'
+        },
+        {
+            key: '4',
+            name: 'nabi',
+            reason: 'Uncommon and difficult-to-pronounce name'
+        },
+        {
+            key: '5',
+            name: 'tuhan',
+            reason: 'Uncommon and difficult-to-pronounce name'
+        },
+        {
+            key: '6',
+            name: 'profesor',
+            reason: 'Uncommon and difficult-to-pronounce name'
+        },
+        {
+            key: '7',
+            name: 'doktor',
+            reason: 'Uncommon and difficult-to-pronounce name'
+        },
+        {
+            key: '8',
+            name: 'virus',
+            reason: 'Uncommon and difficult-to-pronounce name'
+        },
+        {
+            key: '9',
+            name: 'corona',
+            reason: 'Uncommon and difficult-to-pronounce name'
+        },
+        {
+            key: '10',
+            name: 'hacker',
+            reason: 'Uncommon and difficult-to-pronounce name'
+        },
+        {
+            key: '11',
+            name: 'teror',
+            reason: 'Uncommon and difficult-to-pronounce name'
+        },
+        {
+            key: '12',
+            name: 'dosa',
+            reason: 'Uncommon and difficult-to-pronounce name'
+        },
+        {
+            key: '13',
+            name: 'santet',
+            reason: 'Uncommon and difficult-to-pronounce name'
         }
+
     ];
     
     return (
@@ -243,7 +160,7 @@ function BCList() {
                 <Sider style={{ backgroundColor: 'var(--semi-color-bg-1)' }}>
                     <Nav
                         style={{ maxWidth: 220, height: '100%' }}
-                        defaultSelectedKeys={['BCList']}
+                        defaultSelectedKeys={['ProhibitedNames']}
                         items={[
                             { itemKey: 'Home', text: 'Home', icon: <IconHome size="large" />, onClick: () => navigate('/home')},
                             { itemKey: 'ProhibitedNames', text: 'Prohibited Names', icon: <IconClear size="large" />, onClick: () => navigate('/prohibitedNames') },
@@ -265,7 +182,7 @@ function BCList() {
                         style={{
                             marginBottom: '24px',
                         }}
-                        routes={['VeriBirthName', 'BC List']}
+                        routes={['VeriBirthName', 'Prohibited Names']}
                     />
                     <div
                         style={{
@@ -277,7 +194,7 @@ function BCList() {
                     >
                         
                         {/* content start */}
-                        <div><b>Birth Certificate List</b></div><br/>
+                        <div><b>List of Prohibited Names</b></div><br/>
                         <Table columns={columns} dataSource={data} pagination={false} />
                         {/* content end */}
 
@@ -310,4 +227,4 @@ function BCList() {
     );
 };
 
-export default BCList;
+export default ProhibitedNames;
