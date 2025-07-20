@@ -3,7 +3,7 @@
 import React, {useState, useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
 import { IconSemiLogo, IconHome, IconMore, IconTickCircle, IconComment, IconClear, IconFile, IconArrowRight, IconEdit, IconVerify } from '@douyinfe/semi-icons';
-import { Layout, Nav, Button, Breadcrumb, Avatar, Form, Col, Row, Image, ImagePreview, Banner, Table, Tag, Popconfirm } from '@douyinfe/semi-ui';
+import { Layout, Nav, Button, Breadcrumb, Avatar, Form, Col, Row, Image, ImagePreview, Banner, Table, Tag, Popconfirm, Typography } from '@douyinfe/semi-ui';
 
 function Home() {
     const { Header, Footer, Sider, Content } = Layout;
@@ -34,7 +34,7 @@ function Home() {
         ]
     };
     const { Input } = Form;
-    const style = { width: '90%' };
+    const style = { width: '100%' };
 
     const [visibleResultName, setVisibleResultName] = useState(false);
 
@@ -60,7 +60,7 @@ function Home() {
     // set input baby full name
     const [valueFullName, setValueFullName] = useState('Alverionne Winartha');
 
-    const handleChangeFullName = (value) => {
+    const handleChangeFullName = (value, event) => {
         setValueFullName(value);
         
         if(visibleResultName === true){
@@ -70,7 +70,7 @@ function Home() {
 
     const handleReset = () => {
         setVisibleResultName(false);
-        setValueFullName("");
+        remountChild();
     }
 
     // additional field
@@ -110,6 +110,18 @@ function Home() {
     const handleProceed = () => {
         navigate("/bcRegistration");
     };
+
+    const [valueShow, setValueShow] = useState(true);
+    // to reset value Input
+    // doesn't work with atribut key=
+    const remountChild = () => {
+        setValueShow(false);
+        setTimeout(() => {
+            setValueFullName(""); 
+            setValueShow(true);
+        }, 0); // re-render happen
+    };
+    // valueShow in tsx
     
     return (
         <Layout style={{ border: '1px solid var(--semi-color-border)' }}>
@@ -163,9 +175,9 @@ function Home() {
                         defaultSelectedKeys={['Home']}
                         items={[
                             { itemKey: 'Home', text: 'Home', icon: <IconHome size="large" />, onClick: () => navigate('/home')},
-                            { itemKey: 'ProhibitedNames', text: 'Prohibited Names', icon: <IconClear size="large" />, onClick: () => navigate('/prohibitedNames') },
                             { itemKey: 'BCRegistration', text: 'BC Registration', icon: <IconEdit size="large" />, onClick: () => navigate('/bcRegistration') },
                             { itemKey: 'BCList', text: 'BC List', icon: <IconFile size="large" />, onClick: () => navigate('/bcList') },
+                            { itemKey: 'ProhibitedNames', text: 'Prohibited Names', icon: <IconClear size="large" />, onClick: () => navigate('/prohibitedNames') },
                         ]}
                         footer={{
                             collapseButton: false,
@@ -203,22 +215,27 @@ function Home() {
                             <Row>
                                 <Col xs={24} sm={24} md={24} lg={12} xl={12} xxl={12}>
                                     <div><b>Verify Here</b></div><br/>
-                                    <Input
-                                        field="fullname"
-                                        label="Desired Full Name"
-                                        initValue={valueFullName}
-                                        onChange={handleChangeFullName}
-                                        key={valueFullName}
-                                        style={style}
-                                        trigger='blur'
-                                        maxLength={60}
-                                        rules={[
-                                            { validator: (rule, value) => (value.trim().split(/\s+/).length >= 2), message: 'should contain at least 2 words' },
-                                            { validator: (rule, value) => (/[^a-zA-Z ]/.test(value)===false), message: 'numbers or symbols (e.g., "1", "2", “@” or “#”) are not allowed' }
-                                        ]}
-                                    />
+                                    {
+                                        valueShow && 
+                                        <Input
+                                            field="fullname"
+                                            label="Desired Full Name"
+                                            initValue={valueFullName}
+                                            onChange={handleChangeFullName}
+                                            //key={valueFullName}
+                                            style={{width:"90%"}}
+                                            trigger='blur'
+                                            maxLength={60}
+                                            size='large'
+                                            rules={[
+                                                { validator: (rule, value) => (value.trim().split(/\s+/).length >= 2), message: 'should contain at least 2 words' },
+                                                { validator: (rule, value) => (/[^a-zA-Z ]/.test(value)===false), message: 'numbers or symbols (e.g., "1", "2", “@” or “#”) are not allowed' }
+                                            ]}
+                                        />
+                                    }
                                     <Button type='primary' theme='solid' htmlType="submit">Submit</Button>
                                     <Button type='primary' theme='outline' onClick={handleReset} style={{marginLeft:"14px"}}>Reset</Button>
+                                    <span style={{marginLeft:'24px', color:'var(--semi-color-primary)'}}>Length: {valueFullName.length}</span>
 
                                     <div style={{display:(visibleResultName===true ? 'block' : 'none'), padding: 0, marginTop:'20px', border: 'none' }}>
                                         <div>Result:</div>
@@ -229,7 +246,7 @@ function Home() {
                                                 title={<div style={{ fontWeight: 600, fontSize: '14px', lineHeight: '20px' }}>❌ Rejected </div>}
                                                 description={
                                                     <div>
-                                                        The name <b>{valueFullName}</b> has already been used by 32 other citizens.<br/>
+                                                        The name <b>{valueFullName}</b> has already been used by 26 other citizens.<br/>
                                                         Please choose an alternative.
                                                     </div>
                                                 }

@@ -136,9 +136,9 @@ function BCRegistration() {
                         defaultSelectedKeys={['BCRegistration']}
                         items={[
                             { itemKey: 'Home', text: 'Home', icon: <IconHome size="large" />, onClick: () => navigate('/home')},
-                            { itemKey: 'ProhibitedNames', text: 'Prohibited Names', icon: <IconClear size="large" />, onClick: () => navigate('/prohibitedNames') },
                             { itemKey: 'BCRegistration', text: 'BC Registration', icon: <IconEdit size="large" />, onClick: () => navigate('/bcRegistration') },
                             { itemKey: 'BCList', text: 'BC List', icon: <IconFile size="large" />, onClick: () => navigate('/bcList') },
+                            { itemKey: 'ProhibitedNames', text: 'Prohibited Names', icon: <IconClear size="large" />, onClick: () => navigate('/prohibitedNames') }
                         ]}
                         footer={{
                             collapseButton: false,
@@ -175,7 +175,7 @@ function BCRegistration() {
                             onValueChange={(v)=>console.log(v)}
                         >
                             <Row>
-                                <Col xs={24} sm={24} md={24} lg={12} xl={12} xxl={12}>
+                                <Col xs={24} sm={24} md={24} lg={20} xl={20} xxl={20}>
                                     <div style={{padding: 0, border: 'none' }}>
                                         <Row>
                                             <Col sm={24} md={12}>
