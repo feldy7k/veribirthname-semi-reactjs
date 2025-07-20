@@ -2,7 +2,7 @@
 // plan for thesis master degree
 import React, {useState, useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
-import { IconSemiLogo, IconHome, IconMore, IconTickCircle, IconComment, IconClear, IconFile, IconArrowRight, IconEdit } from '@douyinfe/semi-icons';
+import { IconSemiLogo, IconHome, IconMore, IconTickCircle, IconComment, IconClear, IconFile, IconArrowRight, IconEdit,IconScan } from '@douyinfe/semi-icons';
 import { Layout, Nav, Button, Breadcrumb, Avatar, Form, Col, Row, Image, ImagePreview, Banner, Table, Tag, Popconfirm } from '@douyinfe/semi-ui';
 
 function BCRegistration() {
@@ -64,6 +64,10 @@ function BCRegistration() {
     const [valueOfficerNIP, setValueOfficerNIP] = useState('987XXXXXXXXXXXXXXXXX');
     const handleChangeOfficerNIP = (value) => {
         setValueOfficerNIP(value);
+    };
+    const [valueIssuedAt, setValueIssuedAt] = useState('JAKARTA PUSAT');
+    const handleChangeIssuedAt = (value) => {
+        setValueIssuedAt(value);
     };
 
     const navigate = useNavigate();
@@ -202,6 +206,9 @@ function BCRegistration() {
                                                     <Select.Option value="TGR">Tangerang</Select.Option>
                                                 </Select>
                                                 <DatePicker field="date" label='Date of Birth（DatePicker）' style={style} initValue={new Date()} placeholder='Date of Birth' />
+                                                
+                                            </Col>
+                                            <Col sm={24} md={12}>
                                                 <Select field="childno" style={style} label='Child No（Select）' placeholder='Child No'>
                                                     <Select.Option value="1">FIRST</Select.Option>
                                                     <Select.Option value="2">SECOND</Select.Option>
@@ -211,10 +218,10 @@ function BCRegistration() {
                                                     <Select.Option value="6">SIXTH</Select.Option>
                                                     <Select.Option value="7">SEVENTH</Select.Option>
                                                     <Select.Option value="8">EIGHTH</Select.Option>
+                                                    <Select.Option value="9">NINTH</Select.Option>
+                                                    <Select.Option value="10">TENTH</Select.Option>
                                                 </Select>
-                                            </Col>
-                                            <Col sm={24} md={12}>
-                                                <span style={{color:'var(--semi-color-danger)',fontSize:'12px'}}>Please check and ensure it matches the father's name on the ID card</span>
+                                                <span style={{color:'var(--semi-color-danger)',fontSize:'12px'}}>ensure it matches the Father's name on the ID card, or use the scan feature</span>
                                                 <Input
                                                     field="fathername"
                                                     label="Father Name"
@@ -223,8 +230,9 @@ function BCRegistration() {
                                                     onChange={handleChangeFatherName}
                                                     style={style}
                                                     trigger='blur'
+                                                    suffix={<IconScan />}
                                                 />
-                                                <span style={{color:'var(--semi-color-danger)',fontSize:'12px'}}>Please check and ensure it matches the mother's name on the ID card</span>
+                                                <span style={{color:'var(--semi-color-danger)',fontSize:'12px'}}>ensure it matches the Mother's name on the ID card, or use the scan feature</span>
                                                 <Input
                                                     field="mothername"
                                                     label="Mother Name"
@@ -233,7 +241,14 @@ function BCRegistration() {
                                                     onChange={handleChangeMotherName}
                                                     style={style}
                                                     trigger='blur'
+                                                    suffix={<IconScan />}
                                                 />
+                                                
+                                            </Col>
+                                        </Row>
+                                        <div style={{marginTop:'15px'}}>Issuing Office:</div>
+                                        <Row>
+                                            <Col sm={24} md={12}>
                                                 <Input
                                                     field="officername"
                                                     label="Officer Name"
@@ -250,6 +265,18 @@ function BCRegistration() {
                                                     initValue={valueOfficerNIP}
                                                     //value={valueOfficerNIP}
                                                     onChange={handleChangeOfficerNIP}
+                                                    style={style}
+                                                    trigger='blur'
+                                                    disabled
+                                                />
+                                            </Col>
+                                            <Col sm={24} md={12}>
+                                                <Input
+                                                    field="issuedat"
+                                                    label="Issued At"
+                                                    initValue={valueIssuedAt}
+                                                    //value={valueIssuedAt}
+                                                    onChange={handleChangeIssuedAt}
                                                     style={style}
                                                     trigger='blur'
                                                     disabled
