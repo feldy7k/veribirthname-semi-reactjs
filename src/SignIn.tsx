@@ -56,8 +56,8 @@ function SignIn() {
     return (
         <Layout style={{ width:'100%', margin:"0px"}}>
             {/* content start */}
-            <Row>
-                <Col xs={24} sm={24} md={12} lg={8} xl={6} xxl={6}>
+            <Row style={{display:'flex'}}>
+                <Col xs={24} sm={24} md={12} lg={8} xl={6} xxl={6} style={{margin:'0 auto'}}>
                     <Form
                         initValues={initValues}
                         style={{ padding: 15, width: '100%' }}
