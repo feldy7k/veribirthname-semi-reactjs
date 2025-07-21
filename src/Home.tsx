@@ -222,7 +222,6 @@ function Home() {
                                             label="Desired Full Name"
                                             initValue={valueFullName}
                                             onChange={handleChangeFullName}
-                                            //key={valueFullName}
                                             style={{width:"90%"}}
                                             trigger='blur'
                                             maxLength={60}
@@ -233,9 +232,11 @@ function Home() {
                                             ]}
                                         />
                                     }
-                                    <Button type='primary' theme='solid' htmlType="submit">Submit</Button>
-                                    <Button type='primary' theme='outline' onClick={handleReset} style={{marginLeft:"14px"}}>Reset</Button>
-                                    <span style={{marginLeft:'24px', color:'var(--semi-color-primary)'}}>Length: {valueFullName.length}</span>
+                                    <div style={{width:'90%'}}>
+                                        <Button type='primary' theme='solid' htmlType="submit">Submit</Button>
+                                        <Button type='primary' theme='outline' onClick={handleReset} style={{marginLeft:"14px"}}>Reset</Button>
+                                        <span style={{float:'right', color:'var(--semi-color-primary)'}}>Length: {valueFullName.length}, Max: 60</span>
+                                    </div>
 
                                     <div style={{display:(visibleResultName===true ? 'block' : 'none'), padding: 0, marginTop:'20px', border: 'none' }}>
                                         <div>Result:</div>
